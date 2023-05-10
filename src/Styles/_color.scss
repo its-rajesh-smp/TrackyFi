@@ -1,0 +1,15 @@
+$myblue: #1877f2;
+$mygreen: #42b72a;
+$mygrey: #f0f2f5;
+
+//? Functions
+@use "sass:math";
+@function torem($value) {
+  $baseFontSize: 16px;
+  $remValue: math.div($value, $baseFontSize) + rem;
+  @return $remValue;
+}
+@function toper($value) {
+  $remValue: calc(math.div(100, 16) * $value) * 1%;
+  @return $remValue;
+}

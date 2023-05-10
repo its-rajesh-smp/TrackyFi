@@ -1,0 +1,119 @@
+.Login-div {
+  font-family: roboto;
+  display: grid;
+  grid-template-rows: 0.27fr 1fr;
+  height: 100vh;
+  background-color: white;
+}
+
+.Login-div__topDiv {
+  padding: 2.5rem;
+}
+
+.Login-div__div {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Login-div__div .Login-div__middleDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  margin-bottom: 1.25rem;
+}
+.Login-div__div .Login-div__middleDiv h1 {
+  margin-bottom: 1.875rem;
+  font-size: 3.125rem;
+}
+.Login-div__div .Login-div__middleDiv .GoogleBtnContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  align-items: center;
+}
+.Login-div__div .Login-div__middleDiv .GoogleBtnContainer .lineContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3125rem;
+  font-size: 0.75rem;
+  color: gray;
+}
+.Login-div__div .Login-div__middleDiv .GoogleBtnContainer .lineContainer .lines {
+  border-radius: 50%;
+  height: 0.1875rem;
+  background-color: gainsboro;
+  width: 6.25rem;
+}
+.Login-div__div .Login-div__middleDiv .GoogleBtnContainer button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: roboto;
+  font-size: 1rem;
+  height: 2.8125rem;
+  font-weight: 500;
+  border-radius: 0.3125rem;
+  border: none;
+  background-color: #f0f2f5;
+  gap: 0.3125rem;
+}
+.Login-div__div .Login-div__middleDiv .GoogleBtnContainer button i {
+  font-size: 1.875rem;
+}
+
+.Login-div__form {
+  display: flex;
+  flex-direction: column;
+}
+.Login-div__form .Login-div__form_inpDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  margin-bottom: 1.25rem;
+}
+.Login-div__form .Login-div__form_inpDiv input {
+  background-color: #f0f2f5;
+  height: 2.8125rem;
+  border-radius: 0.3125rem;
+  border: none;
+  padding: 0px 0.625rem;
+}
+.Login-div__form button {
+  font-family: roboto;
+  font-size: 1rem;
+  background-color: #1877f2;
+  color: white;
+  height: 2.8125rem;
+  font-weight: 500;
+  width: fit-content;
+  padding: 0px 3.125rem;
+  border-radius: 0.3125rem;
+  border: none;
+  margin: 1.25rem 0px;
+}
+.Login-div__form .Login-div__form_switch p {
+  font-size: 1rem;
+}
+.Login-div__form .Login-div__form_switch p:last-child {
+  font-weight: 500;
+  color: #1877f2;
+}
+
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .Login-div__topDiv {
+    padding: 10px;
+    margin-top: 15px;
+  }
+  .Login-div__div {
+    width: 90%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .Login-div__div {
+    width: 80%;
+  }
+}/*# sourceMappingURL=Login.css.map */

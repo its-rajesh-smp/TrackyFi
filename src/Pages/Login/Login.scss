@@ -1,0 +1,123 @@
+@import "../../Styles/color";
+.Login-div {
+  font-family: roboto;
+  display: grid;
+  grid-template-rows: 0.27fr 1fr;
+  height: 100vh;
+  background-color: white;
+}
+.Login-div__topDiv {
+  padding: torem(40px);
+}
+
+.Login-div__div {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  .Login-div__middleDiv {
+    display: flex;
+    flex-direction: column;
+    gap: torem(5px);
+    margin-bottom: torem(20px);
+    h1 {
+      margin-bottom: torem(30px);
+      font-size: torem(50px);
+    }
+    .GoogleBtnContainer {
+      display: flex;
+      flex-direction: column;
+      gap: torem(5px);
+      align-items: center;
+      .lineContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: torem(5px);
+        font-size: torem(12px);
+        color: gray;
+
+        .lines {
+          border-radius: 50%;
+          height: torem(3px);
+          background-color: gainsboro;
+          width: torem(100px);
+        }
+      }
+      button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: roboto;
+        font-size: torem(16px);
+        height: torem(45px);
+        font-weight: 500;
+        border-radius: torem(5px);
+        border: none;
+        background-color: $mygrey;
+        gap: torem(5px);
+        i {
+          font-size: torem(30px);
+        }
+      }
+    }
+  }
+}
+
+.Login-div__form {
+  display: flex;
+  flex-direction: column;
+  .Login-div__form_inpDiv {
+    display: flex;
+    flex-direction: column;
+    gap: torem(5px);
+    margin-bottom: torem(20px);
+    input {
+      background-color: $mygrey;
+      height: torem(45px);
+      border-radius: torem(5px);
+      border: none;
+      padding: 0px torem(10px);
+    }
+  }
+  button {
+    font-family: roboto;
+    font-size: torem(16px);
+    background-color: $myblue;
+    color: white;
+    height: torem(45px);
+    font-weight: 500;
+    width: fit-content;
+    padding: 0px torem(50px);
+    border-radius: torem(5px);
+    border: none;
+    margin: torem(20px) 0px;
+  }
+  .Login-div__form_switch {
+    p {
+      font-size: torem(16px);
+      &:last-child {
+        font-weight: 500;
+        color: $myblue;
+      }
+    }
+  }
+}
+
+//? Media
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .Login-div__topDiv {
+    padding: 10px;
+    margin-top: 15px;
+  }
+  .Login-div__div {
+    width: 90%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .Login-div__div {
+    width: 80%;
+  }
+}

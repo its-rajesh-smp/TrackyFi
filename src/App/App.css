@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+#root {
+  background-color: #f0f2f5;
+}
+
+.pageContainer {
+  padding: 20px;
+}
+
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  html {
+    font-size: 75%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+/* Tablet 2 */
+@media only screen and (min-device-width: 480px) and (max-device-width: 900px) {
+  html {
+    font-size: 62.5%;
+  }
+}/*# sourceMappingURL=App.css.map */
