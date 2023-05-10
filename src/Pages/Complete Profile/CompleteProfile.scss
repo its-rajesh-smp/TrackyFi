@@ -1,0 +1,78 @@
+@import "../../Styles/color";
+.CompleteProfile-div {
+  font-family: roboto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+.CompleteProfile-div__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  gap: torem(5px);
+  width: 40%;
+  position: relative;
+  h1 {
+    position: absolute;
+    top: 20%;
+    font-size: torem(50px);
+  }
+
+  .imageContainer {
+    img {
+      width: torem(100px);
+    }
+  }
+  .inputContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    div {
+      display: flex;
+      flex-direction: column;
+      input {
+        margin-top: torem(5px);
+        padding: 0px torem(10px);
+        height: torem(40px);
+      }
+    }
+  }
+  .enterBtn {
+    margin-top: torem(5px);
+    align-self: flex-end;
+    bottom: 0;
+    width: fit-content;
+    padding: 0px torem(50px);
+    height: torem(40px);
+    font-family: roboto;
+    background-color: $myblue;
+    border: none;
+    font-size: torem(16px);
+    font-weight: 500;
+    color: white;
+    border-radius: torem(5px);
+  }
+}
+
+//? Media
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .CompleteProfile-div__container {
+    .enterBtn {
+      width: 100%;
+    }
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .CompleteProfile-div__container {
+    .enterBtn {
+      width: 100%;
+    }
+  }
+}

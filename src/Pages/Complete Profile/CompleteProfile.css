@@ -1,0 +1,70 @@
+.CompleteProfile-div {
+  font-family: roboto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.CompleteProfile-div__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.3125rem;
+  width: 40%;
+  position: relative;
+}
+.CompleteProfile-div__container h1 {
+  position: absolute;
+  top: 20%;
+  font-size: 3.125rem;
+}
+.CompleteProfile-div__container .imageContainer img {
+  width: 6.25rem;
+}
+.CompleteProfile-div__container .inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.CompleteProfile-div__container .inputContainer div {
+  display: flex;
+  flex-direction: column;
+}
+.CompleteProfile-div__container .inputContainer div input {
+  margin-top: 0.3125rem;
+  padding: 0px 0.625rem;
+  height: 2.5rem;
+}
+.CompleteProfile-div__container .enterBtn {
+  margin-top: 0.3125rem;
+  align-self: flex-end;
+  bottom: 0;
+  width: fit-content;
+  padding: 0px 3.125rem;
+  height: 2.5rem;
+  font-family: roboto;
+  background-color: #1877f2;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  border-radius: 0.3125rem;
+}
+
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .CompleteProfile-div__container .enterBtn {
+    width: 100%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .CompleteProfile-div__container .enterBtn {
+    width: 100%;
+  }
+}/*# sourceMappingURL=CompleteProfile.css.map */
