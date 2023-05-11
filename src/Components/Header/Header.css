@@ -2,6 +2,7 @@
   position: sticky;
   z-index: 1000;
   height: 100vh;
+  top: 0px;
   width: 3.75rem;
   display: flex;
   padding: 0.3125rem;
