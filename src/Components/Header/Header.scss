@@ -1,6 +1,19 @@
 @import "../../Styles/color";
 .Header-div {
-  height: 60px;
+  position: relative;
+  z-index: 1000;
+  height: 100vh;
+  width: torem(60px);
+  display: flex;
+  padding: torem(5px);
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  box-shadow: 2px 2px 5px $mygrey;
+  flex-direction: column;
+  box-shadow: 1px 0px 5px #646464;
+  i {
+    color: #646464;
+    font-size: torem(40px);
+  }
 }

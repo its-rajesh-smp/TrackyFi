@@ -6,14 +6,15 @@
 
 html {
   font-size: 100%;
-}
-
-#root {
-  background-color: #f0f2f5;
+  background-color: #e0e0e0;
 }
 
 .pageContainer {
   padding: 20px;
+}
+
+.App-div {
+  display: flex;
 }
 
 /* Smartphones  */

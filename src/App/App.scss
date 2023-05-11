@@ -6,13 +6,17 @@
 }
 html {
   font-size: toper(16);
+  background-color: $mygrey;
 }
 #root {
-  background-color: $mygrey;
 }
 
 .pageContainer {
   padding: 20px;
+}
+
+.App-div {
+  display: flex;
 }
 
 //? Media

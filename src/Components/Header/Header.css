@@ -1,5 +1,18 @@
 .Header-div {
-  height: 60px;
+  position: relative;
+  z-index: 1000;
+  height: 100vh;
+  width: 3.75rem;
+  display: flex;
+  padding: 0.3125rem;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
-  box-shadow: 2px 2px 5px #f0f2f5;
+  flex-direction: column;
+  box-shadow: 1px 0px 5px #646464;
+}
+.Header-div i {
+  color: #646464;
+  font-size: 2.5rem;
 }/*# sourceMappingURL=Header.css.map */

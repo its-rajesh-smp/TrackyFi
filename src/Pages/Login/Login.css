@@ -4,6 +4,7 @@
   grid-template-rows: 0.27fr 1fr;
   height: 100vh;
   background-color: white;
+  width: 100%;
 }
 
 .Login-div__topDiv {
@@ -56,7 +57,7 @@
   font-weight: 500;
   border-radius: 0.3125rem;
   border: none;
-  background-color: #f0f2f5;
+  background-color: #e0e0e0;
   gap: 0.3125rem;
 }
 .Login-div__div .Login-div__middleDiv .GoogleBtnContainer button i {
@@ -74,7 +75,7 @@
   margin-bottom: 1.25rem;
 }
 .Login-div__form .Login-div__form_inpDiv input {
-  background-color: #f0f2f5;
+  background-color: #e0e0e0;
   height: 2.8125rem;
   border-radius: 0.3125rem;
   border: none;
