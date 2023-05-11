@@ -8,7 +8,7 @@ import HomePage from "../Pages/Home Page/HomePage";
 function App(props) {
   return (
     <div className=" App-div  ">
-      <Header />
+      {/* <Header /> */}
       {/* <Login /> */}
       {/* <CompleteProfile /> */}
       <HomePage />

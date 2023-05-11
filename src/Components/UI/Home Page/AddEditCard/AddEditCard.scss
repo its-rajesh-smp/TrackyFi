@@ -1,0 +1,61 @@
+@import "../../../../Styles/color";
+.AddEditCard-div__wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.11);
+}
+.AddEditCard-div {
+  background-color: #e3dffd;
+  padding: torem(50px) torem(50px);
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: torem(5px);
+  border-radius: torem(5px);
+  font-family: poppins;
+  box-shadow: 1px 1px 5px gray;
+
+  h3 {
+    font-size: torem(20px);
+    margin-bottom: torem(30px);
+  }
+  input,
+  button {
+    box-sizing: border-box;
+    width: 100%;
+    height: torem(40px);
+    padding-left: torem(10px);
+  }
+  .AddEditCard-div_dateTimeContainer {
+    display: flex;
+    gap: torem(5px);
+    justify-content: space-between;
+  }
+  .btnContainer {
+    display: flex;
+    width: 100%;
+    gap: torem(5px);
+  }
+  button {
+    background-color: aquamarine;
+    border-radius: torem(5px);
+    border: none;
+    font-family: poppins;
+    font-size: torem(16px);
+    box-shadow: 1px 1px 5px gray;
+    margin-top: torem(20px);
+  }
+}

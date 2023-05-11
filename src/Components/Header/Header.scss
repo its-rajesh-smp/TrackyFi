@@ -1,6 +1,6 @@
 @import "../../Styles/color";
 .Header-div {
-  position: relative;
+  position: sticky;
   z-index: 1000;
   height: 100vh;
   width: torem(60px);

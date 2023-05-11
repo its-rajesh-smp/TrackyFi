@@ -1,0 +1,21 @@
+@import "../../../../Styles/color";
+.AddNew-div {
+  background-color: #df2e38;
+  color: white;
+  font-size: torem(20px);
+  width: torem(50px);
+  height: torem(50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: torem(50px);
+  cursor: pointer;
+  position: fixed;
+  bottom: 10vh;
+  right: 10vw;
+  box-shadow: 1px 1px 5px black;
+  user-select: none;
+}
+.AddNew-div:hover {
+  background-color: #a5363b;
+}

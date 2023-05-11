@@ -1,0 +1,27 @@
+@import "../../../../Styles/color";
+.Transection-div {
+  display: flex;
+  width: 100%;
+  font-family: poppins;
+  background-color: #d2daff;
+  padding: torem(10px);
+  box-sizing: border-box;
+  border-radius: torem(5px);
+  justify-content: space-between;
+  .Transection-div_left {
+    .Transection-div_Name {
+      font-size: torem(16px);
+      font-weight: 600;
+    }
+    .Transection-div_Date {
+      font-size: torem(12px);
+    }
+    .Transection-div_Time {
+      font-size: torem(10px);
+    }
+  }
+  .Transection-div_right {
+    font-size: torem(16px);
+    font-weight: 600;
+  }
+}

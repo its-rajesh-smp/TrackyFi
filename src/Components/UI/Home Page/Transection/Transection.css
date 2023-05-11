@@ -1,0 +1,24 @@
+.Transection-div {
+  display: flex;
+  width: 100%;
+  font-family: poppins;
+  background-color: #d2daff;
+  padding: 0.625rem;
+  box-sizing: border-box;
+  border-radius: 0.3125rem;
+  justify-content: space-between;
+}
+.Transection-div .Transection-div_left .Transection-div_Name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.Transection-div .Transection-div_left .Transection-div_Date {
+  font-size: 0.75rem;
+}
+.Transection-div .Transection-div_left .Transection-div_Time {
+  font-size: 0.625rem;
+}
+.Transection-div .Transection-div_right {
+  font-size: 1rem;
+  font-weight: 600;
+}/*# sourceMappingURL=Transection.css.map */

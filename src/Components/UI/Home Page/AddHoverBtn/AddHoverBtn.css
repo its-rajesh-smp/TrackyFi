@@ -1,0 +1,21 @@
+.AddNew-div {
+  background-color: #df2e38;
+  color: white;
+  font-size: 1.25rem;
+  width: 3.125rem;
+  height: 3.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3.125rem;
+  cursor: pointer;
+  position: fixed;
+  bottom: 10vh;
+  right: 10vw;
+  box-shadow: 1px 1px 5px black;
+  user-select: none;
+}
+
+.AddNew-div:hover {
+  background-color: #a5363b;
+}/*# sourceMappingURL=AddHoverBtn.css.map */

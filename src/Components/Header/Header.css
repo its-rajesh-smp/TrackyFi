@@ -1,5 +1,5 @@
 .Header-div {
-  position: relative;
+  position: sticky;
   z-index: 1000;
   height: 100vh;
   width: 3.75rem;

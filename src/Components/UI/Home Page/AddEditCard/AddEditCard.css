@@ -1,0 +1,60 @@
+.AddEditCard-div__wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.11);
+}
+
+.AddEditCard-div {
+  background-color: #e3dffd;
+  padding: 3.125rem 3.125rem;
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3125rem;
+  border-radius: 0.3125rem;
+  font-family: poppins;
+  box-shadow: 1px 1px 5px gray;
+}
+.AddEditCard-div h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.875rem;
+}
+.AddEditCard-div input,
+.AddEditCard-div button {
+  box-sizing: border-box;
+  width: 100%;
+  height: 2.5rem;
+  padding-left: 0.625rem;
+}
+.AddEditCard-div .AddEditCard-div_dateTimeContainer {
+  display: flex;
+  gap: 0.3125rem;
+  justify-content: space-between;
+}
+.AddEditCard-div .btnContainer {
+  display: flex;
+  width: 100%;
+  gap: 0.3125rem;
+}
+.AddEditCard-div button {
+  background-color: aquamarine;
+  border-radius: 0.3125rem;
+  border: none;
+  font-family: poppins;
+  font-size: 1rem;
+  box-shadow: 1px 1px 5px gray;
+  margin-top: 1.25rem;
+}/*# sourceMappingURL=AddEditCard.css.map */
