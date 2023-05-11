@@ -1,19 +1,25 @@
 .Header-div {
-  position: sticky;
-  z-index: 1000;
   height: 100vh;
-  top: 0px;
-  width: 3.75rem;
+  position: sticky;
+  top: 0;
   display: flex;
-  padding: 0.3125rem;
   box-sizing: border-box;
-  justify-content: space-between;
-  align-items: center;
   background-color: white;
-  flex-direction: column;
   box-shadow: 1px 0px 5px #646464;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem;
 }
 .Header-div i {
-  color: #646464;
-  font-size: 2.5rem;
+  color: #ef5757;
+  font-size: 1.875rem;
+}
+.Header-div .Header-div__top,
+.Header-div .Header-div__bottom {
+  gap: 0.625rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=Header.css.map */
