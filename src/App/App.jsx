@@ -4,6 +4,7 @@ import Header from "../Components/Header/Header";
 import Login from "../Pages/Login/Login";
 import CompleteProfile from "../Pages/Complete Profile/CompleteProfile";
 import HomePage from "../Pages/Home Page/HomePage";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 function App(props) {
   return (
@@ -11,7 +12,8 @@ function App(props) {
       <Header />
       {/* <Login /> */}
       {/* <CompleteProfile /> */}
-      <HomePage />
+      {/* <HomePage /> */}
+      <Dashboard />
     </div>
   );
 }

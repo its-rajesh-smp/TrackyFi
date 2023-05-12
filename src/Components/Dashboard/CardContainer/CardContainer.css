@@ -1,0 +1,10 @@
+.CardContainer-div {
+  margin-top: 1.875rem;
+}
+.CardContainer-div .CardContainer-div__for {
+  font-size: 1rem;
+}
+.CardContainer-div .CardContainer-div__container {
+  display: flex;
+  gap: 0.3125rem;
+}/*# sourceMappingURL=CardContainer.css.map */

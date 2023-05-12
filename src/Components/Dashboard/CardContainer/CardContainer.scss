@@ -1,0 +1,11 @@
+@import "../../../Styles/color";
+.CardContainer-div {
+  margin-top: torem(30px);
+  .CardContainer-div__for {
+    font-size: torem(16px);
+  }
+  .CardContainer-div__container {
+    display: flex;
+    gap: torem(5px);
+  }
+}
