@@ -1,0 +1,12 @@
+.LineChart-div {
+  width: 100%;
+  height: 100%;
+}
+.LineChart-div .chart-wrapper {
+  width: 100%;
+  height: 100%;
+}
+.LineChart-div .chart-wrapper canvas {
+  width: 50%;
+  height: 100%;
+}/*# sourceMappingURL=LineChart.css.map */
