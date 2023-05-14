@@ -1,3 +1,4 @@
+@import "../../../../Styles/color";
 .MiniCard-div {
   background-color: rgba(224, 224, 224, 0.297);
   display: flex;
@@ -5,7 +6,7 @@
   justify-content: space-evenly;
   box-sizing: border-box;
   width: 100%;
-  border-radius: 5px;
+  border-radius: torem(5px);
   height: 50%;
   .MiniCard-div__div {
     display: flex;
@@ -13,6 +14,12 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    h1 {
+      font-size: torem(30px);
+    }
+    h3 {
+      font-size: torem(15px);
+    }
   }
   .chart-wrapper {
     width: 50%;

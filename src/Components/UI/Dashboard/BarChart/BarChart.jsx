@@ -27,12 +27,12 @@ function BarChart(props) {
             {
               backgroundColor: "green",
               data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-              barThickness: "20",
+              barThickness: "15",
             },
             {
               backgroundColor: "red",
               data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-              barThickness: "20",
+              barThickness: "15",
             },
           ],
         }}
