@@ -3,4 +3,14 @@
   flex-direction: column;
   gap: 0.3125rem;
   width: 100%;
+  font-family: poppins;
+  margin-bottom: 25px;
+}
+.TransectionsContainer-div .currentDate span:first-child {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.TransectionsContainer-div .currentDate span:last-child {
+  padding-left: 0.3125rem;
+  font-size: 0.75rem;
 }/*# sourceMappingURL=TransectionsContainer.css.map */

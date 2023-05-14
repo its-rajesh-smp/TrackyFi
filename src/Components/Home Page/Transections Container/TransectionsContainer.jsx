@@ -5,41 +5,10 @@ import Transection from "../../UI/Home Page/Transection/Transection";
 function TransectionsContainer(props) {
   return (
     <div className=" TransectionsContainer-div ">
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
-      <Transection />
+      <p className="currentDate">
+        <span>29/11/2000</span>
+        <span>Sunday</span>
+      </p>
       <Transection />
       <Transection />
       <Transection />

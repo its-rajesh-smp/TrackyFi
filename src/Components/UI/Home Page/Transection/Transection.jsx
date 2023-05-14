@@ -5,7 +5,9 @@ function Transection(props) {
   return (
     <div className=" Transection-div ">
       <div className="Transection-div_left">
-        <p className="Transection-div_Name">Chicken</p>
+        <p className="Transection-div_Name">
+          <span>Chicken</span> / <span className="catagorie">Food</span>
+        </p>
         <div className="Transection-div__div">
           <p className="Transection-div_Date">29/11/2000</p>
           <p className="Transection-div_Time">02:33 AM</p>

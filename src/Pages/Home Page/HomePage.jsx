@@ -9,9 +9,11 @@ import AddEditCard from "../../Components/UI/Home Page/AddEditCard/AddEditCard";
 function HomePage(props) {
   return (
     <div className=" HomePage-div ">
+      <h1>Transections</h1>
       <AddHoverBtn />
       <FilterField />
       <TotalAmount />
+      <TransectionsContainer />
       <TransectionsContainer />
       {/* <AddEditCard /> */}
     </div>

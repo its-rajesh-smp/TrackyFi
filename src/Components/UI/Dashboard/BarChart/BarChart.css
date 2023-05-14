@@ -1,0 +1,19 @@
+.BarChart-div {
+  width: 100%;
+  height: 100%;
+}
+.BarChart-div .chart-wrapper {
+  width: 100%;
+  height: 100%;
+}
+.BarChart-div .chart-wrapper canvas {
+  width: 50%;
+  height: 100%;
+}
+
+.chartjs-tooltip {
+  display: none;
+}
+
+/* Smartphones  */
+/* Tablet 2 *//*# sourceMappingURL=BarChart.css.map */

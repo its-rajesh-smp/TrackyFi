@@ -12,6 +12,10 @@
   font-size: 1rem;
   font-weight: 600;
 }
+.Transection-div .Transection-div_left .Transection-div_Name .catagorie {
+  font-weight: normal;
+  font-size: 0.75rem;
+}
 .Transection-div .Transection-div_left .Transection-div_Date {
   font-size: 0.75rem;
 }

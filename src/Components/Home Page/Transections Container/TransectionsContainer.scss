@@ -4,4 +4,18 @@
   flex-direction: column;
   gap: torem(5px);
   width: 100%;
+  font-family: poppins;
+  margin-bottom: 25px;
+  .currentDate {
+    span {
+      &:first-child {
+        font-size: torem(18px);
+        font-weight: 700;
+      }
+      &:last-child {
+        padding-left: torem(5px);
+        font-size: torem(12px);
+      }
+    }
+  }
 }

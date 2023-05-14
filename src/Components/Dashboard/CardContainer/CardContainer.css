@@ -7,4 +7,6 @@
 .CardContainer-div .CardContainer-div__container {
   display: flex;
   gap: 0.3125rem;
+  height: 15.625rem;
+  width: calc(100vw - 9.375rem);
 }/*# sourceMappingURL=CardContainer.css.map */

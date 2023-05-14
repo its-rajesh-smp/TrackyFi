@@ -1,0 +1,12 @@
+.DoughnutChart-div {
+  width: 30%;
+  height: 100%;
+}
+.DoughnutChart-div .chart-wrapper {
+  width: 100%;
+  height: 100%;
+}
+.DoughnutChart-div canvas {
+  width: 50%;
+  height: 100%;
+}/*# sourceMappingURL=DoughnutChart.css.map */

@@ -4,7 +4,11 @@
   margin-left: auto;
   margin-right: auto;
   width: 40%;
-  padding: 5px;
+  padding: 1.25rem;
+}
+.HomePage-div h1 {
+  font-size: 2.1875rem;
+  font-family: poppins;
 }
 
 /* Smartphones  */

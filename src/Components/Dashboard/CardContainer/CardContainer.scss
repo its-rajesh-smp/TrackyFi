@@ -7,5 +7,7 @@
   .CardContainer-div__container {
     display: flex;
     gap: torem(5px);
+    height: torem(250px);
+    width: calc(100vw - torem(150px));
   }
 }

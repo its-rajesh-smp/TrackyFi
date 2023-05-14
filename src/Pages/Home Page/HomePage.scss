@@ -1,10 +1,15 @@
+@import "../../Styles/color";
 .HomePage-div {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
   width: 40%;
-  padding: 5px;
+  padding: torem(20px);
+  h1 {
+    font-size: torem(35px);
+    font-family: poppins;
+  }
 }
 
 //? Media

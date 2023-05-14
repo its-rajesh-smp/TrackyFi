@@ -1,0 +1,80 @@
+@import "../../Styles/color";
+.UserProfile-div {
+  padding: torem(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: poppins;
+  margin-left: auto;
+  width: 30%;
+  margin-right: auto;
+  gap: torem(20px);
+  .UserProfileImg {
+    width: torem(150px);
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: torem(5px);
+    align-items: center;
+    .inputGrp {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      input {
+        background-color: aliceblue;
+        border: none;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        font-family: poppins;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0px torem(20px);
+        outline: none;
+        height: torem(40px);
+      }
+      i {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: aliceblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: torem(40px);
+        box-sizing: border-box;
+        padding: torem(20px);
+      }
+    }
+    .btnGroup {
+      display: flex;
+      width: 100%;
+      gap: torem(5px);
+      button {
+        font-family: poppins;
+        height: torem(50px);
+        border: none;
+        width: 100%;
+      }
+    }
+    p {
+      font-size: torem(12px);
+      margin-top: 5px;
+    }
+  }
+}
+
+//? Media
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .UserProfile-div {
+    width: 100%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .UserProfile-div {
+    width: 70%;
+  }
+}

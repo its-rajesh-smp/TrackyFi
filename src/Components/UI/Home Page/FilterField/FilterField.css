@@ -29,7 +29,8 @@
   margin: 0px 0.625rem;
 }
 .input_fields select {
-  width: 100%;
+  border-color: gainsboro;
+  width: 40%;
   font-family: "Poppins", sans-serif;
   height: 1.875rem;
   border-radius: 0.3125rem;
