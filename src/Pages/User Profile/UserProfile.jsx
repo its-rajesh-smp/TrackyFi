@@ -32,7 +32,14 @@ function UserProfile(props) {
           <button>VERIFY</button>
           <button>SAVE</button>
         </div>
+        <button className="downloadBTN">DOWNLOAD</button>
         <p>Verify your account to use 100% of our app</p>
+        <a
+          href="https://pages.razorpay.com/pl_LqZNxW1c4Uvlx6/view"
+          target="_blank"
+        >
+          Become a primium to download all data
+        </a>
       </form>
     </div>
   );

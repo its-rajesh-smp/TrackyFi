@@ -14,8 +14,8 @@ function App(props) {
       {/* <UserProfile /> */}
       {/* <Login /> */}
       {/* <CompleteProfile /> */}
-      {/* <HomePage /> */}
-      <Dashboard />
+      <HomePage />
+      {/* <Dashboard /> */}
     </div>
   );
 }

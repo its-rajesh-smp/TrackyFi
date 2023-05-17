@@ -59,6 +59,12 @@
   border: none;
   width: 100%;
 }
+.UserProfile-div form .downloadBTN {
+  font-family: poppins;
+  height: 3.125rem;
+  border: none;
+  width: 100%;
+}
 .UserProfile-div form p {
   font-size: 0.75rem;
   margin-top: 5px;

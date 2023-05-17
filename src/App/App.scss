@@ -9,7 +9,11 @@ html {
 }
 #root {
 }
-
+a {
+  color: none;
+  font-size: 12px;
+  text-decoration: none;
+}
 .pageContainer {
   padding: 20px;
 }
