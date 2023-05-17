@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CompleteProfile.css";
+import { useDispatch } from "react-redux";
+import { verifyUserfunc } from "../../Store/Reducer/authReducer";
 
 function CompleteProfile(props) {
+  const [name, setName] = useState();
+  const [mobile, setMobile] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  /* -------------------------------------------------------------------------- */
+  /*                                ON BTN SUBMIT                               */
+  /* -------------------------------------------------------------------------- */
+  const onBtnSubmitHandeler = () => {
+    if (!loading) {
+      setLoading(true);
+      dispatch(verifyUserfunc(name, mobile, setLoading));
+    }
+  };
+
   return (
     <div className=" CompleteProfile-div ">
       <div className="CompleteProfile-div__container">
@@ -16,6 +33,7 @@ function CompleteProfile(props) {
           <div>
             <label htmlFor="Name">Name</label>
             <input
+              onChange={(e) => setName(e.target.value)}
               type="text"
               name="Name"
               placeholder="Enter Your Name"
@@ -25,6 +43,7 @@ function CompleteProfile(props) {
           <div>
             <label htmlFor="Mobile Number">Mobile Number</label>
             <input
+              onChange={(e) => setMobile(e.target.value)}
               type="text"
               name="Mobile Number"
               placeholder="Enter Mobile Number"
@@ -33,7 +52,9 @@ function CompleteProfile(props) {
           </div>
         </div>
 
-        <button className="enterBtn">ENTER</button>
+        <button onClick={onBtnSubmitHandeler} className="enterBtn">
+          {loading ? <i className="bx bx-loader-circle bx-spin"></i> : "ENTER"}
+        </button>
       </div>
     </div>
   );

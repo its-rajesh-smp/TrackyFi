@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useDispatch } from "react-redux";
-import { createUser } from "../../Store/Reducer/authReducer";
+import { createUserfunc } from "../../Store/Reducer/authReducer";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function Login(props) {
     if (!loader) {
       setLoader(true);
       dispatch(
-        createUser(
+        createUserfunc(
           { email: email, password: password },
           switchLogin,
           onSwitchLoginHandeler,
