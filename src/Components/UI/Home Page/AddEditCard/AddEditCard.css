@@ -27,6 +27,17 @@
   border-radius: 0.3125rem;
   font-family: poppins;
   box-shadow: 1px 1px 5px gray;
+  position: relative;
+}
+.AddEditCard-div .bx-x {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: white;
+  font-size: 50px;
+  background-color: gray;
+  border-top-right-radius: 0.3125rem;
+  border-bottom-left-radius: 1.25rem;
 }
 .AddEditCard-div h3 {
   font-size: 1.25rem;

@@ -5,17 +5,22 @@ import FilterField from "../../Components/UI/Home Page/FilterField/FilterField";
 import TotalAmount from "../../Components/UI/Home Page/Total Amount/TotalAmount";
 import TransectionsContainer from "../../Components/Home Page/Transections Container/TransectionsContainer";
 import AddEditCard from "../../Components/UI/Home Page/AddEditCard/AddEditCard";
+import { useSelector } from "react-redux";
 
 function HomePage(props) {
+  const toggleAddCard = useSelector((state) => state.toggleAddEdit);
+
   return (
     <div className=" HomePage-div ">
       <h1>Transections</h1>
-      <AddHoverBtn />
       <FilterField />
       <TotalAmount />
       <TransectionsContainer />
       <TransectionsContainer />
-      {/* <AddEditCard /> */}
+
+      {!toggleAddCard.isAdd && !toggleAddCard.isEdit && <AddHoverBtn />}
+
+      {(toggleAddCard.isAdd || toggleAddCard.isEdit) && <AddEditCard />}
     </div>
   );
 }

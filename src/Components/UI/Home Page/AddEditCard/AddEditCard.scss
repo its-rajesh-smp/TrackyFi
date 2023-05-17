@@ -27,6 +27,17 @@
   border-radius: torem(5px);
   font-family: poppins;
   box-shadow: 1px 1px 5px gray;
+  position: relative;
+  .bx-x {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    font-size: 50px;
+    background-color: gray;
+    border-top-right-radius: torem(5px);
+    border-bottom-left-radius: torem(20px);
+  }
 
   h3 {
     font-size: torem(20px);
