@@ -37,6 +37,7 @@ function AddEditCard(props) {
     <div className=" AddEditCard-div__wrapper ">
       <form className="AddEditCard-div">
         <i onClick={onCloseBtnHandeler} className="bx bx-x"></i>
+        <i class="bx bxs-box"></i>
 
         <h3>Add New Expenses</h3>
 

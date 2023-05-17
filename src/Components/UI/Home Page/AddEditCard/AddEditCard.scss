@@ -33,10 +33,19 @@
     right: 0;
     top: 0;
     color: white;
-    font-size: 50px;
+    font-size: torem(50px);
     background-color: gray;
     border-top-right-radius: torem(5px);
     border-bottom-left-radius: torem(20px);
+  }
+  .bxs-box {
+    position: absolute;
+    left: 0;
+    margin-left: torem(5px);
+    margin-bottom: torem(5px);
+    bottom: 0;
+    font-size: torem(30px);
+    color: rgb(255, 0, 0);
   }
 
   h3 {

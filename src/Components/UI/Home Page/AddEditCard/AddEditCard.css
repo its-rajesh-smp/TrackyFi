@@ -34,10 +34,19 @@
   right: 0;
   top: 0;
   color: white;
-  font-size: 50px;
+  font-size: 3.125rem;
   background-color: gray;
   border-top-right-radius: 0.3125rem;
   border-bottom-left-radius: 1.25rem;
+}
+.AddEditCard-div .bxs-box {
+  position: absolute;
+  left: 0;
+  margin-left: 0.3125rem;
+  margin-bottom: 0.3125rem;
+  bottom: 0;
+  font-size: 1.875rem;
+  color: rgb(255, 0, 0);
 }
 .AddEditCard-div h3 {
   font-size: 1.25rem;
