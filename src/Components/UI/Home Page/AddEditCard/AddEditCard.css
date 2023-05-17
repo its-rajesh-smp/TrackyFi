@@ -44,7 +44,8 @@
   margin-bottom: 1.875rem;
 }
 .AddEditCard-div input,
-.AddEditCard-div button {
+.AddEditCard-div button,
+.AddEditCard-div select {
   box-sizing: border-box;
   width: 100%;
   height: 2.5rem;

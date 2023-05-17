@@ -15,11 +15,11 @@ function HomePage(props) {
       <h1>Transections</h1>
       <FilterField />
       <TotalAmount />
+
       <TransectionsContainer />
       <TransectionsContainer />
 
       {!toggleAddCard.isAdd && !toggleAddCard.isEdit && <AddHoverBtn />}
-
       {(toggleAddCard.isAdd || toggleAddCard.isEdit) && <AddEditCard />}
     </div>
   );

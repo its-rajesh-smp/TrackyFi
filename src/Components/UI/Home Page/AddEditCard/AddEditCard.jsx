@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddEditCard.css";
 import { useDispatch } from "react-redux";
 import { disableToggle } from "../../../../Store/Reducer/toggleAddEditExpense";
@@ -12,21 +12,105 @@ function AddEditCard(props) {
     dispatch(disableToggle());
   };
 
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  /* -------------------------------------------------------------------------- */
+  /*                                 ADD EXPENSE                                */
+
+  /* -------------------------------------------------------------------------- */
+  const onAddExpenseHandeler = (e) => {
+    const newExpenseObject = {
+      name: name,
+      data: date,
+      time: time,
+      price: price,
+      category: category,
+    };
+    console.log(newExpenseObject);
+  };
+
   return (
     <div className=" AddEditCard-div__wrapper ">
       <form className="AddEditCard-div">
         <i onClick={onCloseBtnHandeler} className="bx bx-x"></i>
+
         <h3>Add New Expenses</h3>
-        <input type="text" placeholder="Expense Name" name="" id="" />
+
+        <input
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          type="text"
+          placeholder="Expense Name"
+          name=""
+          id=""
+        />
+
         <div className="AddEditCard-div_dateTimeContainer">
-          <input type="text" placeholder="Date" name="" id="" />
-          <input type="text" placeholder="Time" name="" id="" />
+          <input
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+            type="text"
+            placeholder="Date"
+            name=""
+            id=""
+          />
+          <input
+            onChange={(e) => {
+              setTime(e.target.value);
+            }}
+            type="text"
+            placeholder="Time"
+            name=""
+            id=""
+          />
         </div>
-        <input type="text" placeholder="Catagorie" name="" id="" />
-        <input type="text" placeholder="Price" name="" id="" />
+
+        <select
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+          name="cataselect"
+          id="cataselect"
+        >
+          <option value="book">Book</option>
+          <option value="mobile">Mobile</option>
+          <option value="petrol">Petrol</option>
+        </select>
+
+        <input
+          onChange={(e) => {
+            setPrice(e.target.value);
+          }}
+          type="text"
+          placeholder="Price"
+          name=""
+          id=""
+        />
+
         <div className="btnContainer">
-          <button className="addEditBtn">ADD</button>
-          <button className="addEditBtn">CREDIT</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              onAddExpenseHandeler("expense");
+            }}
+            className="addEditBtn"
+          >
+            ADD
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              onAddExpenseHandeler("credit");
+            }}
+            className="addEditBtn"
+          >
+            CREDIT
+          </button>
         </div>
       </form>
     </div>
