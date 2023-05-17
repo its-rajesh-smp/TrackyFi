@@ -17,6 +17,13 @@ function AllTransectionContainer(props) {
   /*                                FORMING ARRAY                               */
   /* -------------------------------------------------------------------------- */
   const expenseObj = useSelector((state) => state.transectionReducer.expense);
+  if (
+    expenseObj === null ||
+    expenseObj === undefined ||
+    Object.keys(expenseObj).length === 0
+  ) {
+    return;
+  }
   const newExpenseCover = Object.keys(expenseObj).map((date) => {
     return (
       <TransectionsContainer
