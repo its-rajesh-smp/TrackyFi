@@ -26,12 +26,21 @@ const authReducer = createSlice({
             state.isVerified = action.payload.userData.isVerified
             state.userData = action.payload.userAuth
             state.idToken = action.payload.idToken
+        },
+        logoutUser: () => {
+            return {
+                isAuth: false,
+                VIP: false,
+                isVerified: false,
+                idToken: "",
+                userData: {}
+            }
         }
     }
 
 })
 
-export const { authUser, verifyUser, fetchUser } = authReducer.actions
+export const { authUser, verifyUser, fetchUser, logoutUser } = authReducer.actions
 export default authReducer
 
 /* -------------------------------------------------------------------------- */
@@ -41,18 +50,27 @@ export default authReducer
 export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const { data: authData } = await axios.post(switchLogin ? LOGIN_USER : CREATE_USER, { ...enteredData, returnSecureToken: true })
-            localStorage.setItem("trackfyUser", authData.idToken)
-            setLoader(false)
-            dispatch(authUser(authData))
+            if (!switchLogin) {
+                const { data: authData } = await axios.post(CREATE_USER, { ...enteredData, returnSecureToken: true })
+                localStorage.setItem("trackfyUser", authData.idToken)
+                const userEmail = authData.email.replace(".", "").replace("@", "")
+                const { data: userData } = await axios.patch(`${USERS}/${userEmail}.json`, {
+                    isVerified: false,
+                    email: authData.email
+                })
+                dispatch(authUser(authData))
+                setLoader(false)
+            }
+            else {
+                const { data: authData } = await axios.post(LOGIN_USER, { ...enteredData, returnSecureToken: true })
+                localStorage.setItem("trackfyUser", authData.idToken)
+                const userEmail = authData.email.replace(".", "").replace("@", "")
+                const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
+                dispatch(authUser(authData))
+                dispatch(verifyUser(userData))
+                setLoader(false)
+            }
 
-            // Storing the user in our list as well
-            const userEmail = authData.email.replace(".", "").replace("@", "")
-            const { data: userData } = await axios.put(`${USERS}/${userEmail}.json`, {
-                isVerified: false,
-                email: authData.email
-            })
-            console.log(userData);
         } catch (error) {
             let message = error.response.data.error.message
             alert(message)
@@ -70,7 +88,10 @@ export const fetchUsefunc = (setLoading) => {
     return async (dispatch, getState) => {
         try {
             const localToken = localStorage.getItem("trackfyUser")
-            if (localToken === null) { return }
+            if (localToken === null) {
+                setLoading(false)
+                return
+            }
             const { data: authData } = await axios.post(GET_USER, { idToken: localToken })
             const userAuth = authData.users[0]
             const userEmail = userAuth.email.replace(".", "").replace("@", "")
@@ -79,6 +100,7 @@ export const fetchUsefunc = (setLoading) => {
             setLoading(false)
         } catch (error) {
             console.log(error);
+            setLoading(false)
         }
     }
 }
@@ -98,3 +120,12 @@ export const verifyUserfunc = (name, mobile, setLoading) => {
     }
 }
 
+
+
+//! LOGOUT USER
+export const logoutUserfunc = () => {
+    return (dispatch) => {
+        localStorage.clear("trackfyUser")
+        dispatch(logoutUser())
+    }
+}

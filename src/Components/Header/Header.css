@@ -22,4 +22,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.bxs-log-out {
+  cursor: pointer;
 }/*# sourceMappingURL=Header.css.map */
