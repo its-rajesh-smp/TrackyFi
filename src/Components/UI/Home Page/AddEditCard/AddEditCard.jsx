@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddEditCard.css";
 import { useDispatch } from "react-redux";
 import { disableToggle } from "../../../../Store/Reducer/toggleAddEditExpense";
+import { addExpensefunc } from "../../../../Store/Reducer/transectionReducer";
 
 function AddEditCard(props) {
   /* -------------------------------------------------------------------------- */
@@ -24,12 +25,12 @@ function AddEditCard(props) {
   const onAddExpenseHandeler = (e) => {
     const newExpenseObject = {
       name: name,
-      data: date,
+      date: date,
       time: time,
       price: price,
       category: category,
     };
-    console.log(newExpenseObject);
+    dispatch(addExpensefunc(newExpenseObject));
   };
 
   return (
@@ -54,7 +55,7 @@ function AddEditCard(props) {
             onChange={(e) => {
               setDate(e.target.value);
             }}
-            type="text"
+            type="date"
             placeholder="Date"
             name=""
             id=""
@@ -63,7 +64,7 @@ function AddEditCard(props) {
             onChange={(e) => {
               setTime(e.target.value);
             }}
-            type="text"
+            type="time"
             placeholder="Time"
             name=""
             id=""

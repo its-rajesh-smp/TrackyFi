@@ -6,16 +6,17 @@ function Transection(props) {
     <div className=" Transection-div ">
       <div className="Transection-div_left">
         <p className="Transection-div_Name">
-          <span>Chicken</span> / <span className="catagorie">Food</span>
+          <span>{props.data.name}</span> /{" "}
+          <span className="catagorie">{props.data.category}</span>
         </p>
         <div className="Transection-div__div">
-          <p className="Transection-div_Date">29/11/2000</p>
-          <p className="Transection-div_Time">02:33 AM</p>
+          <p className="Transection-div_Date">{props.data.date}</p>
+          <p className="Transection-div_Time">{props.data.time}</p>
         </div>
       </div>
       <div className="Transection-div_right">
         <p>
-          <span>2500</span> $
+          <span>{props.data.price}</span> $
         </p>
       </div>
     </div>
