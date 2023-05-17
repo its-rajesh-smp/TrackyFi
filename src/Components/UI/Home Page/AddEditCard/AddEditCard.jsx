@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./AddEditCard.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { disableToggle } from "../../../../Store/Reducer/toggleAddEditExpense";
-import { addExpensefunc } from "../../../../Store/Reducer/transectionReducer";
+import {
+  addExpensefunc,
+  deleteExpense,
+} from "../../../../Store/Reducer/transectionReducer";
 
 function AddEditCard(props) {
   /* -------------------------------------------------------------------------- */
@@ -13,14 +16,15 @@ function AddEditCard(props) {
     dispatch(disableToggle());
   };
 
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const selector = useSelector((state) => state.toggleAddEdit);
+
+  const [name, setName] = useState(selector.data.name);
+  const [date, setDate] = useState(selector.data.date);
+  const [time, setTime] = useState(selector.data.time);
+  const [price, setPrice] = useState(selector.data.price);
+  const [category, setCategory] = useState(selector.data.category);
   /* -------------------------------------------------------------------------- */
   /*                                 ADD EXPENSE                                */
-
   /* -------------------------------------------------------------------------- */
   const onAddExpenseHandeler = (e) => {
     const newExpenseObject = {
@@ -33,18 +37,29 @@ function AddEditCard(props) {
     dispatch(addExpensefunc(newExpenseObject));
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                               DELETE EXPENSE                               */
+  /* -------------------------------------------------------------------------- */
+  const onDeleteBtnClick = (e) => {
+    dispatch(deleteExpense(selector.data.containerId, selector.data.id));
+  };
+
   return (
     <div className=" AddEditCard-div__wrapper ">
       <form className="AddEditCard-div">
         <i onClick={onCloseBtnHandeler} className="bx bx-x"></i>
-        <i class="bx bxs-box"></i>
 
-        <h3>Add New Expenses</h3>
+        {selector.isEdit && (
+          <i onClick={onDeleteBtnClick} className="bx bxs-box"></i>
+        )}
+
+        <h3>{selector.isEdit ? "Edit Expense" : "Add New Expenses"}</h3>
 
         <input
           onChange={(e) => {
             setName(e.target.value);
           }}
+          value={name}
           type="text"
           placeholder="Expense Name"
           name=""
@@ -56,6 +71,7 @@ function AddEditCard(props) {
             onChange={(e) => {
               setDate(e.target.value);
             }}
+            value={date}
             type="date"
             placeholder="Date"
             name=""
@@ -65,6 +81,7 @@ function AddEditCard(props) {
             onChange={(e) => {
               setTime(e.target.value);
             }}
+            value={time}
             type="time"
             placeholder="Time"
             name=""
@@ -76,6 +93,7 @@ function AddEditCard(props) {
           onChange={(e) => {
             setCategory(e.target.value);
           }}
+          value={category}
           name="cataselect"
           id="cataselect"
         >
@@ -88,6 +106,7 @@ function AddEditCard(props) {
           onChange={(e) => {
             setPrice(e.target.value);
           }}
+          value={price}
           type="text"
           placeholder="Price"
           name=""

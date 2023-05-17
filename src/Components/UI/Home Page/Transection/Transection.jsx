@@ -1,9 +1,25 @@
 import React from "react";
 import "./Transection.css";
+import { useDispatch } from "react-redux";
+import { toggleEdit } from "../../../../Store/Reducer/toggleAddEditExpense";
 
 function Transection(props) {
+  /* -------------------------------------------------------------------------- */
+  /*                                  ON CLICK                                  */
+  /* -------------------------------------------------------------------------- */
+  const dispatch = useDispatch();
+  const onClickHandeler = () => {
+    dispatch(
+      toggleEdit({
+        ...props.data,
+        id: props.id,
+        containerId: props.containerId,
+      })
+    );
+  };
+
   return (
-    <div className=" Transection-div ">
+    <div onClick={onClickHandeler} className=" Transection-div ">
       <div className="Transection-div_left">
         <p className="Transection-div_Name">
           <span>{props.data.name}</span> /{" "}

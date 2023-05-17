@@ -76,3 +76,28 @@ export const fetchExpensefunc = () => {
         }
     }
 }
+
+//! Delete Expense
+export const deleteExpense = (expenseDate, expenseId) => {
+    return async (dispatch, getState) => {
+        try {
+            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
+            const prevData = { ...getState().transectionReducer.expense }
+            await axios.delete(`${USERS}/${userEmail}/transections/${"expense"}/${expenseDate}/${expenseId}.json`)
+            const newObj = { ...prevData[expenseDate] }
+            delete newObj[expenseId]
+            if (Object.keys(newObj).length === 0) {
+                const updatedData = { ...prevData }
+                delete updatedData[expenseDate]
+                dispatch(fetchExpense(updatedData))
+            }
+            else {
+                const updatedData = { ...prevData, [expenseDate]: newObj }
+                dispatch(fetchExpense(updatedData))
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}

@@ -7,7 +7,12 @@ import Transection from "../../UI/Home Page/Transection/Transection";
 function TransectionsContainer(props) {
   const newExpenseArr = Object.keys(props.list).map((expense) => {
     return (
-      <Transection key={expense} id={expense} data={props.list[expense]} />
+      <Transection
+        containerId={props.id}
+        key={expense}
+        id={expense}
+        data={props.list[expense]}
+      />
     );
   });
 
