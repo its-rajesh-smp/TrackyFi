@@ -13,7 +13,10 @@ function Transection(props) {
   };
 
   return (
-    <div onClick={onClickHandeler} className=" Transection-div ">
+    <div
+      onClick={onClickHandeler}
+      className={` Transection-div ${props.data.type}`}
+    >
       <div className="Transection-div_left">
         <p className="Transection-div_Name">
           <span>{props.data.name}</span> /{" "}

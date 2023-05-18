@@ -30,7 +30,7 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
-            const { data } = await axios.post(`${USERS}/${userEmail}/transections/expense.json`, expenseData)
+            const { data } = await axios.post(`${USERS}/${userEmail}/transections.json`, expenseData)
             const responseId = data.name
             const newObj = { ...expenseData, id: responseId }
             dispatch(addExpense(newObj))
@@ -49,7 +49,7 @@ export const fetchExpensefunc = () => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
-            const { data } = await axios.get(`${USERS}/${userEmail}/transections/expense.json`)
+            const { data } = await axios.get(`${USERS}/${userEmail}/transections.json`)
             const newExpenseArr = Object.keys(data).map((expenseId) => {
                 return { ...data[expenseId], id: expenseId }
             })
@@ -65,7 +65,7 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
-            const { data } = await axios.delete(`${USERS}/${userEmail}/transections/expense/${expenseId}.json`)
+            const { data } = await axios.delete(`${USERS}/${userEmail}/transections/${expenseId}.json`)
             const prevData = getState().transectionReducer.expense
             const updatedDataArray = prevData.filter((expesnes) => {
                 if (expesnes.id !== expenseId) {
@@ -89,7 +89,7 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
             const prevData = getState().transectionReducer.expense
-            const { data } = await axios.put(`${USERS}/${userEmail}/transections/expense/${expenseId}.json`, expenseData)
+            const { data } = await axios.put(`${USERS}/${userEmail}/transections/${expenseId}.json`, expenseData)
             const updatedDataArray = prevData.map((val) => {
                 if (val.id === expenseId) {
                     return { ...data, id: expenseId }

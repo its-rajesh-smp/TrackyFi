@@ -25,4 +25,12 @@
 .Transection-div .Transection-div_right {
   font-size: 1rem;
   font-weight: 600;
+}
+
+.credit {
+  background-color: rgb(197, 249, 118);
+}
+
+.expense {
+  background-color: rgb(254, 163, 163);
 }/*# sourceMappingURL=Transection.css.map */

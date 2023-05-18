@@ -30,6 +30,9 @@ function AddEditCard(props) {
   /*                                 ADD EXPENSE                                */
   /* -------------------------------------------------------------------------- */
   const onAddExpenseHandeler = (e) => {
+    if (name === "" || date === "" || price === "") {
+      return;
+    }
     if (!loader) {
       setLoader(true);
       const newExpenseObject = {
@@ -38,6 +41,7 @@ function AddEditCard(props) {
         time: time,
         price: price,
         category: category,
+        type: e,
       };
 
       if (selector.isEdit) {
