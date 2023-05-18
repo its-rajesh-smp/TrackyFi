@@ -18,35 +18,30 @@
     width: 100%;
     gap: torem(5px);
     align-items: center;
-    .inputGrp {
+    input {
+      background-color: aliceblue;
+      border: none;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      font-family: poppins;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0px torem(20px);
+      outline: none;
+      height: torem(40px);
+    }
+    i {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background-color: aliceblue;
       display: flex;
       align-items: center;
-      width: 100%;
       justify-content: center;
-      input {
-        background-color: aliceblue;
-        border: none;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        font-family: poppins;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 0px torem(20px);
-        outline: none;
-        height: torem(40px);
-      }
-      i {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        background-color: aliceblue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: torem(40px);
-        box-sizing: border-box;
-        padding: torem(20px);
-      }
+      height: torem(40px);
+      box-sizing: border-box;
+      padding: torem(20px);
     }
+
     .btnGroup {
       display: flex;
       width: 100%;

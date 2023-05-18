@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 function MyRoutes(props) {
   const isVarified = useSelector((state) => state.authReducer.isVerified);
+
   return (
     <Routes>
       {isVarified && (

@@ -1,18 +1,10 @@
-import React, { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchExpensefunc } from "../../../Store/Reducer/transectionReducer";
+import React, { memo } from "react";
+import { useSelector } from "react-redux";
+
 // Components
 import TransectionsContainer from "../Transections Container/TransectionsContainer";
 
 function AllTransectionContainer(props) {
-  /* -------------------------------------------------------------------------- */
-  /*                              FETCH ALL EXPENSE                             */
-  /* -------------------------------------------------------------------------- */
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchExpensefunc());
-  }, []);
-
   /* -------------------------------------------------------------------------- */
   /*                                FORMING ARRAY                               */
   /* -------------------------------------------------------------------------- */

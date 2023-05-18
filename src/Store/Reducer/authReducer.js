@@ -1,39 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { CREATE_USER, GET_USER, LOGIN_USER, UPDATE_USER, USERS } from "../../Firebase/APIURL";
+import { fetchExpense } from "./transectionReducer";
+import { fetchTotal } from "./totalReducer";
+
 
 
 const authReducer = createSlice({
     name: "user/auth",
     initialState: {
+
         isAuth: false,
-        VIP: false,
         isVerified: false,
-        idToken: "",
-        userData: {}
+
     },
     reducers: {
         authUser: (state, action) => {
             state.isAuth = true
-            state.idToken = action.payload.idToken
-            state.userData = action.payload
+            Object.assign(state, action.payload)
         },
         verifyUser: (state, action) => {
-            return { ...state, ...action.payload }
+            Object.assign(state, action.payload)
+
         },
         fetchUser: (state, action) => {
+            Object.assign(state, action.payload)
             state.isAuth = true
-            state.isVerified = action.payload.userData.isVerified
-            state.userData = action.payload.userAuth
-            state.idToken = action.payload.idToken
+
         },
         logoutUser: () => {
             return {
                 isAuth: false,
-                VIP: false,
                 isVerified: false,
-                idToken: "",
-                userData: {}
             }
         }
     }
@@ -66,14 +64,39 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 localStorage.setItem("trackfyUser", authData.idToken)
                 const userEmail = authData.email.replace(".", "").replace("@", "")
                 const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
-                dispatch(authUser(authData))
-                dispatch(verifyUser(userData))
+
+
+                // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
+                const userTransections = userData.transections === undefined ? {} : userData.transections
+                const totalTransection = { totalExpense: 0, totalCredit: 0 }
+                const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
+                    if (userTransections[expenseId].type === "credit") {
+                        totalTransection.totalCredit += Number(userTransections[expenseId].price)
+                    }
+                    else {
+                        totalTransection.totalExpense += Number(userTransections[expenseId].price)
+                    }
+                    return { ...userTransections[expenseId], id: expenseId }
+                })
+
+                // DISPATCH TRANSECTIONS
+                dispatch(fetchExpense(newExpenseArr))
+                // DISPATCH TOTAL
+                dispatch(fetchTotal(totalTransection))
+                // DISPATCH USER
+
+                // Before Dispatch removing the transection field
+                delete userData.transections
+                const newUserDataObj = { ...authData, ...userData }
+
+                dispatch(fetchUser(newUserDataObj))
                 setLoader(false)
             }
 
         } catch (error) {
             let message = error.response.data.error.message
             alert(message)
+            console.log(error);
             setLoader(false)
             if (message === "EMAIL_EXISTS" || message === "EMAIL_NOT_FOUND") {
                 onSwitchLoginHandeler()
@@ -94,9 +117,36 @@ export const fetchUsefunc = (setLoading) => {
             }
             const { data: authData } = await axios.post(GET_USER, { idToken: localToken })
             const userAuth = authData.users[0]
+
+
             const userEmail = userAuth.email.replace(".", "").replace("@", "")
             const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
-            dispatch(fetchUser({ userAuth: userAuth, userData: userData, idToken: localToken }))
+
+
+            // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
+            const userTransections = userData.transections === undefined ? {} : userData.transections
+            const totalTransection = { totalExpense: 0, totalCredit: 0 }
+            const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
+                if (userTransections[expenseId].type === "credit") {
+                    totalTransection.totalCredit += Number(userTransections[expenseId].price)
+                }
+                else {
+                    totalTransection.totalExpense += Number(userTransections[expenseId].price)
+                }
+                return { ...userTransections[expenseId], id: expenseId }
+            })
+
+            // DISPATCH TRANSECTIONS
+            dispatch(fetchExpense(newExpenseArr))
+            // DISPATCH TOTAL
+            dispatch(fetchTotal(totalTransection))
+            // DISPATCH USER
+
+            // Before Dispatch removing the transection field
+            delete userData.transections
+            const newUserDataObj = { ...userAuth, ...userData, idToken: localToken }
+
+            dispatch(fetchUser(newUserDataObj))
             setLoading(false)
         } catch (error) {
             console.log(error);

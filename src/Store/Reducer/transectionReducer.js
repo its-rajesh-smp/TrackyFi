@@ -9,7 +9,6 @@ const transectionReducer = createSlice({
     reducers: {
         addExpense: (state, action) => {
             state.expense = [...state.expense, action.payload]
-
         },
         fetchExpense: (state, action) => {
             state.expense = action.payload
@@ -18,7 +17,7 @@ const transectionReducer = createSlice({
 })
 
 
-const { addExpense, fetchExpense } = transectionReducer.actions
+export const { addExpense, fetchExpense } = transectionReducer.actions
 export default transectionReducer
 
 
@@ -30,7 +29,7 @@ export default transectionReducer
 export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
+            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
             const { data } = await axios.post(`${USERS}/${userEmail}/transections.json`, expenseData)
             const responseId = data.name
             const newObj = { ...expenseData, id: responseId }
@@ -52,37 +51,14 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
 }
 
 //! Fetch Expense
-export const fetchExpensefunc = () => {
-    return async (dispatch, getState) => {
-        try {
-            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
-            const { data } = await axios.get(`${USERS}/${userEmail}/transections.json`)
-            const totalTransection = { totalExpense: 0, totalCredit: 0 }
-
-            const newExpenseArr = Object.keys(data).map((expenseId) => {
-                if (data[expenseId].type === "credit") {
-                    totalTransection.totalCredit += Number(data[expenseId].price)
-                }
-                else {
-                    totalTransection.totalExpense += Number(data[expenseId].price)
-                }
-                return { ...data[expenseId], id: expenseId }
-            })
-
-
-            dispatch(fetchExpense(newExpenseArr))
-            dispatch(fetchTotal(totalTransection))
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
+// Fetching expensess in also done from auth just because we will get all the data related to the user in 
+// a single api call
 
 //! Delete Expense
 export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
+            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
             const { data } = await axios.delete(`${USERS}/${userEmail}/transections/${expenseId}.json`)
             const prevData = getState().transectionReducer.expense
             const updatedDataArray = prevData.filter((expesnes) => {
@@ -114,7 +90,7 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
 export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
+            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
             const prevData = getState().transectionReducer.expense
             const { data } = await axios.put(`${USERS}/${userEmail}/transections/${expenseId}.json`, expenseData)
             const updatedDataArray = prevData.map((val) => {
