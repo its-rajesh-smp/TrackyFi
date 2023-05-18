@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExpensefunc } from "../../../Store/Reducer/transectionReducer";
 // Components
@@ -38,4 +38,4 @@ function AllTransectionContainer(props) {
   );
 }
 
-export default AllTransectionContainer;
+export default memo(AllTransectionContainer);

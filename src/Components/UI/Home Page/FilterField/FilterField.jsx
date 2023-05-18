@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./FilterField.css";
 function FilterField() {
   return (
@@ -17,4 +17,4 @@ function FilterField() {
   );
 }
 
-export default FilterField;
+export default memo(FilterField);

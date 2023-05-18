@@ -29,6 +29,10 @@
   box-shadow: 1px 1px 5px gray;
   position: relative;
 }
+.AddEditCard-div .addEditLoader {
+  position: fixed;
+  font-size: 70px;
+}
 .AddEditCard-div .bx-x {
   position: absolute;
   right: 0;
@@ -58,7 +62,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 2.5rem;
-  padding-left: 0.625rem;
+  padding: 0px 0.625rem;
 }
 .AddEditCard-div .AddEditCard-div_dateTimeContainer {
   display: flex;

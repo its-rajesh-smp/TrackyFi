@@ -9,6 +9,15 @@ import {
 } from "../../../../Store/Reducer/transectionReducer";
 
 function AddEditCard(props) {
+  const selector = useSelector((state) => state.toggleAddEdit);
+  const [name, setName] = useState(selector.data.name);
+  const [date, setDate] = useState(selector.data.date);
+  const [time, setTime] = useState(selector.data.time);
+  const [price, setPrice] = useState(selector.data.price);
+  const [category, setCategory] = useState(
+    selector.data.category === "" ? "Not Selected" : selector.data.category
+  );
+  const [loader, setLoader] = useState(false);
   /* -------------------------------------------------------------------------- */
   /*                                ON CLOSE BTN                                */
   /* -------------------------------------------------------------------------- */
@@ -17,28 +26,34 @@ function AddEditCard(props) {
     dispatch(disableToggle());
   };
 
-  const selector = useSelector((state) => state.toggleAddEdit);
-  const [name, setName] = useState(selector.data.name);
-  const [date, setDate] = useState(selector.data.date);
-  const [time, setTime] = useState(selector.data.time);
-  const [price, setPrice] = useState(selector.data.price);
-  const [category, setCategory] = useState(selector.data.category);
   /* -------------------------------------------------------------------------- */
   /*                                 ADD EXPENSE                                */
   /* -------------------------------------------------------------------------- */
   const onAddExpenseHandeler = (e) => {
-    const newExpenseObject = {
-      name: name,
-      date: date,
-      time: time,
-      price: price,
-      category: category,
-    };
+    if (!loader) {
+      setLoader(true);
+      const newExpenseObject = {
+        name: name,
+        date: date,
+        time: time,
+        price: price,
+        category: category,
+      };
 
-    if (selector.isEdit) {
-      dispatch(editExpensefunc(selector.data.id, newExpenseObject));
-    } else {
-      dispatch(addExpensefunc(newExpenseObject));
+      if (selector.isEdit) {
+        dispatch(
+          editExpensefunc(
+            selector.data.id,
+            newExpenseObject,
+            onCloseBtnHandeler,
+            setLoader
+          )
+        );
+      } else {
+        dispatch(
+          addExpensefunc(newExpenseObject, onCloseBtnHandeler, setLoader)
+        );
+      }
     }
   };
 
@@ -46,19 +61,25 @@ function AddEditCard(props) {
   /*                               DELETE EXPENSE                               */
   /* -------------------------------------------------------------------------- */
   const onDeleteBtnClick = (e) => {
-    dispatch(deleteExpense(selector.data.id));
+    if (!loader) {
+      setLoader(true);
+      dispatch(deleteExpense(selector.data.id, onCloseBtnHandeler, setLoader));
+    }
   };
 
   return (
     <div className=" AddEditCard-div__wrapper ">
       <form className="AddEditCard-div">
+        {loader && (
+          <i className="addEditLoader bx bx-loader-circle bx-spin"></i>
+        )}
         <i onClick={onCloseBtnHandeler} className="bx bx-x"></i>
 
         {selector.isEdit && (
           <i onClick={onDeleteBtnClick} className="bx bxs-box"></i>
         )}
 
-        <h3>{selector.isEdit ? "Edit Expense" : "Add New Expenses"}</h3>
+        <h3>{selector.isEdit ? "Edit Transection" : "Add New Transection"}</h3>
 
         <input
           onChange={(e) => {
@@ -102,6 +123,7 @@ function AddEditCard(props) {
           name="cataselect"
           id="cataselect"
         >
+          <option value="not selected">Not Selected</option>
           <option value="book">Book</option>
           <option value="mobile">Mobile</option>
           <option value="petrol">Petrol</option>
@@ -126,7 +148,7 @@ function AddEditCard(props) {
             }}
             className="addEditBtn"
           >
-            ADD
+            EXPENSE
           </button>
           <button
             onClick={(e) => {

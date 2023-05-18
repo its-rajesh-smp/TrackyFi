@@ -26,7 +26,7 @@ export default transectionReducer
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 //! Add Expense
-export const addExpensefunc = (expenseData) => {
+export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
@@ -34,8 +34,11 @@ export const addExpensefunc = (expenseData) => {
             const responseId = data.name
             const newObj = { ...expenseData, id: responseId }
             dispatch(addExpense(newObj))
+            setLoader(false)
+            onCloseBtnHandeler()
 
         } catch (error) {
+            setLoader(false)
             console.log(error);
         }
     }
@@ -58,7 +61,7 @@ export const fetchExpensefunc = () => {
 }
 
 //! Delete Expense
-export const deleteExpense = (expenseId) => {
+export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
@@ -70,8 +73,10 @@ export const deleteExpense = (expenseId) => {
                 }
             })
             dispatch(fetchExpense(updatedDataArray))
-
+            setLoader(false)
+            onCloseBtnHandeler()
         } catch (error) {
+            setLoader(false)
             console.log(error);
         }
     }
@@ -79,7 +84,7 @@ export const deleteExpense = (expenseId) => {
 
 
 // !Edit expense
-export const editExpensefunc = (expenseId, expenseData) => {
+export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
@@ -94,8 +99,11 @@ export const editExpensefunc = (expenseId, expenseData) => {
                 }
             })
             dispatch(fetchExpense(updatedDataArray))
+            setLoader(false)
+            onCloseBtnHandeler()
 
         } catch (error) {
+            setLoader(false)
             console.log(error);
         }
     }

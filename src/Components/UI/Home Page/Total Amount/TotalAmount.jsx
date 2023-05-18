@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./TotalAmount.css";
 
 function TotalAmount(props) {
@@ -12,4 +12,4 @@ function TotalAmount(props) {
   );
 }
 
-export default TotalAmount;
+export default memo(TotalAmount);
