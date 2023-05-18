@@ -138,7 +138,7 @@ function AddEditCard(props) {
             setPrice(e.target.value);
           }}
           value={price}
-          type="text"
+          type="number"
           placeholder="Price"
           name=""
           id=""

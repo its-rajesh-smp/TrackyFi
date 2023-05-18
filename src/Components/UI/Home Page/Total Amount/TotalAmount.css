@@ -4,4 +4,13 @@
   margin: 1.25rem 0px;
   font-family: poppins;
   font-size: 1rem;
+}
+
+.TotalAmount-Div_totalExpense {
+  margin-right: 0.625rem;
+  color: rgb(202, 0, 0);
+}
+
+.TotalAmount-Div_totalCredit {
+  color: green;
 }/*# sourceMappingURL=TotalAmount.css.map */

@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { GET_USER, USERS } from "../../Firebase/APIURL";
+import { USERS } from "../../Firebase/APIURL";
+import { fetchTotal, increamentExpense, increamentCredit, decreamentCredit, decreamentExpense } from "./totalReducer";
 
 const transectionReducer = createSlice({
     name: "transections",
-    initialState: { expense: [], credit: [] },
+    initialState: { expense: [] },
     reducers: {
         addExpense: (state, action) => {
             state.expense = [...state.expense, action.payload]
@@ -34,6 +35,12 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
             const responseId = data.name
             const newObj = { ...expenseData, id: responseId }
             dispatch(addExpense(newObj))
+            if (expenseData.type === "credit") {
+                dispatch(increamentCredit(expenseData.price))
+            }
+            else {
+                dispatch(increamentExpense(expenseData.price))
+            }
             setLoader(false)
             onCloseBtnHandeler()
 
@@ -50,10 +57,21 @@ export const fetchExpensefunc = () => {
         try {
             const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
             const { data } = await axios.get(`${USERS}/${userEmail}/transections.json`)
+            const totalTransection = { totalExpense: 0, totalCredit: 0 }
+
             const newExpenseArr = Object.keys(data).map((expenseId) => {
+                if (data[expenseId].type === "credit") {
+                    totalTransection.totalCredit += Number(data[expenseId].price)
+                }
+                else {
+                    totalTransection.totalExpense += Number(data[expenseId].price)
+                }
                 return { ...data[expenseId], id: expenseId }
             })
+
+
             dispatch(fetchExpense(newExpenseArr))
+            dispatch(fetchTotal(totalTransection))
         } catch (error) {
             console.log(error);
         }
@@ -68,7 +86,16 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
             const { data } = await axios.delete(`${USERS}/${userEmail}/transections/${expenseId}.json`)
             const prevData = getState().transectionReducer.expense
             const updatedDataArray = prevData.filter((expesnes) => {
-                if (expesnes.id !== expenseId) {
+                if (expesnes.id === expenseId) {
+                    if (expesnes.type === "credit") {
+                        dispatch(decreamentCredit(expesnes.price))
+                    }
+                    else {
+                        dispatch(decreamentExpense(expesnes.price))
+                    }
+                }
+                else {
+
                     return true
                 }
             })
@@ -92,6 +119,24 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
             const { data } = await axios.put(`${USERS}/${userEmail}/transections/${expenseId}.json`, expenseData)
             const updatedDataArray = prevData.map((val) => {
                 if (val.id === expenseId) {
+                    if (val.type === "credit") {
+                        dispatch(decreamentCredit(val.price))
+                        if (expenseData.type === "credit") {
+                            dispatch(increamentCredit(val.price))
+                        }
+                        else {
+                            dispatch(increamentExpense(val.price))
+                        }
+                    }
+                    else {
+                        dispatch(decreamentExpense(val.price))
+                        if (expenseData.type === "credit") {
+                            dispatch(increamentCredit(val.price))
+                        }
+                        else {
+                            dispatch(increamentExpense(val.price))
+                        }
+                    }
                     return { ...data, id: expenseId }
                 }
                 else {
