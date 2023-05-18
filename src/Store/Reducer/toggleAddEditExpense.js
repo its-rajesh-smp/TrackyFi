@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const toggleAddEditExpense = createSlice({
     name: "toggle/expenseAddEdit",
-    initialState: { isEdit: false, isAdd: false, data: { name: "", category: "", date: "", time: "", price: "" } },
+    initialState: {
+        isEdit: false,
+        isAdd: false,
+        data: { name: "", category: "", date: "", time: "", price: "", id: "" }
+    },
     reducers: {
         toggleAdd: (state) => {
             state.isAdd = true
@@ -12,7 +16,11 @@ const toggleAddEditExpense = createSlice({
             state.data = action.payload
         },
         disableToggle: () => {
-            return { isEdit: false, isAdd: false, data: { name: "", category: "", date: "", time: "", price: "" } }
+            return {
+                isEdit: false,
+                isAdd: false,
+                data: { name: "", category: "", date: "", time: "", price: "", id: "" }
+            }
         }
     }
 })

@@ -9,13 +9,7 @@ function Transection(props) {
   /* -------------------------------------------------------------------------- */
   const dispatch = useDispatch();
   const onClickHandeler = () => {
-    dispatch(
-      toggleEdit({
-        ...props.data,
-        id: props.id,
-        containerId: props.containerId,
-      })
-    );
+    dispatch(toggleEdit(props.data));
   };
 
   return (

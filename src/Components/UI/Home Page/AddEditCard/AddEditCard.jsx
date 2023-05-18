@@ -5,6 +5,7 @@ import { disableToggle } from "../../../../Store/Reducer/toggleAddEditExpense";
 import {
   addExpensefunc,
   deleteExpense,
+  editExpensefunc,
 } from "../../../../Store/Reducer/transectionReducer";
 
 function AddEditCard(props) {
@@ -17,7 +18,6 @@ function AddEditCard(props) {
   };
 
   const selector = useSelector((state) => state.toggleAddEdit);
-
   const [name, setName] = useState(selector.data.name);
   const [date, setDate] = useState(selector.data.date);
   const [time, setTime] = useState(selector.data.time);
@@ -34,14 +34,19 @@ function AddEditCard(props) {
       price: price,
       category: category,
     };
-    dispatch(addExpensefunc(newExpenseObject));
+
+    if (selector.isEdit) {
+      dispatch(editExpensefunc(selector.data.id, newExpenseObject));
+    } else {
+      dispatch(addExpensefunc(newExpenseObject));
+    }
   };
 
   /* -------------------------------------------------------------------------- */
   /*                               DELETE EXPENSE                               */
   /* -------------------------------------------------------------------------- */
   const onDeleteBtnClick = (e) => {
-    dispatch(deleteExpense(selector.data.containerId, selector.data.id));
+    dispatch(deleteExpense(selector.data.id));
   };
 
   return (

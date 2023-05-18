@@ -5,24 +5,17 @@ import "./TransectionsContainer.css";
 import Transection from "../../UI/Home Page/Transection/Transection";
 
 function TransectionsContainer(props) {
-  const newExpenseArr = Object.keys(props.list).map((expense) => {
-    return (
-      <Transection
-        containerId={props.id}
-        key={expense}
-        id={expense}
-        data={props.list[expense]}
-      />
-    );
-  });
+  const transectionArr = props.data;
 
   return (
     <div className=" TransectionsContainer-div ">
       <p className="currentDate">
-        <span>{props.date}</span>
+        <span>{props.id}</span>
         <span>Sunday</span>
       </p>
-      {newExpenseArr}
+      {transectionArr.map((expense) => {
+        return <Transection key={expense.id} data={expense} />;
+      })}
     </div>
   );
 }

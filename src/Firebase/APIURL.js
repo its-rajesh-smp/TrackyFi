@@ -5,4 +5,4 @@ export const GET_USER = `https://identitytoolkit.googleapis.com/v1/accounts:look
 export const UPDATE_USER = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
 
 
-export const USERS = "https://trackyfi-a3960-default-rtdb.asia-southeast1.firebasedatabase.app/users/"
+export const USERS = "https://trackyfi-a3960-default-rtdb.asia-southeast1.firebasedatabase.app/users"

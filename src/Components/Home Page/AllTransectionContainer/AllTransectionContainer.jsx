@@ -16,26 +16,26 @@ function AllTransectionContainer(props) {
   /* -------------------------------------------------------------------------- */
   /*                                FORMING ARRAY                               */
   /* -------------------------------------------------------------------------- */
-  const expenseObj = useSelector((state) => state.transectionReducer.expense);
-  if (
-    expenseObj === null ||
-    expenseObj === undefined ||
-    Object.keys(expenseObj).length === 0
-  ) {
-    return;
-  }
-  const newExpenseCover = Object.keys(expenseObj).map((date) => {
-    return (
-      <TransectionsContainer
-        id={date}
-        key={date}
-        date={date}
-        list={expenseObj[date]}
-      />
-    );
+  const expenseArr = useSelector((state) => state.transectionReducer.expense);
+  const map = new Map();
+  expenseArr.forEach((expense) => {
+    if (map.has(expense.date)) {
+      map.set(expense.date, [...map.get(expense.date), expense]);
+    } else {
+      map.set(expense.date, [expense]);
+    }
   });
 
-  return <div className=" AllTransectionContainer-div ">{newExpenseCover}</div>;
+  const newTransectionCover = [];
+  for (let i of map) {
+    newTransectionCover.push(
+      <TransectionsContainer key={i[0]} id={i[0]} data={i[1]} />
+    );
+  }
+
+  return (
+    <div className=" AllTransectionContainer-div ">{newTransectionCover}</div>
+  );
 }
 
 export default AllTransectionContainer;
