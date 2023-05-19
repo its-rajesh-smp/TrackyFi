@@ -259,7 +259,12 @@ export const sendForgotPassword = (email, setLoader, setOnForgot) => {
 export const fetchPayment = (paymentCode) => {
     return async (dispatch, getState) => {
         try {
-            const { data } = await axios.get(`${FETCH_PAYMENT}/${paymentCode}`, AUTH_DETAILS)
+            const { data } = await axios.get('https://api.razorpay.com/v1/payments/pay_LrRQr67nDCIYjr', {
+                auth: {
+                    "username": "rzp_test_mPoNwadW6BCpBy",
+                    "password": "sgs9uUwqA81IEvL6yjEQn7qa"
+                }
+            })
             console.log(data);
         } catch (error) {
             console.log(error);
