@@ -49,18 +49,6 @@ function Dashboard(props) {
       expenseMap.set(expense.date, [expense]);
     }
 
-    // Category Map
-    if (expense.type === "expense") {
-      if (categoryMap.has(expense.category)) {
-        categoryMap.set(expense.category, [
-          ...categoryMap.get(expense.category),
-          expense,
-        ]);
-      } else {
-        categoryMap.set(expense.category, [expense]);
-      }
-    }
-
     //This Month Map
     if (new Date(expense.date).getMonth() === todayMonth) {
       if (thisMonthMap.has(expense.date)) {
@@ -133,17 +121,13 @@ function Dashboard(props) {
         thisDateCredit={thisDateCredit}
         thisMonthExpense={thisMonthExpense}
         thisMonthCredit={thisMonthCredit}
-        totalExpenseArr={totalExpenseArr}
-        totalCreditArr={totalCreditArr}
-        totalThisYearCredit={totalThisYearCredit}
-        totalThisYearExpense={totalThisYearExpense}
         totalThisDateCredit={totalThisDateCredit}
         totalThisDateExpense={totalThisDateExpense}
         totalThisMonthCredit={totalThisMonthCredit}
         totalThisMonthExpense={totalThisMonthExpense}
       />
 
-      <CardContainer>
+      <CardContainer for="Monthly">
         <BarChart
           monthDatesArr={monthDatesArr}
           thisMonthExpense={thisMonthExpense}
@@ -151,7 +135,7 @@ function Dashboard(props) {
         />
       </CardContainer>
 
-      <CardContainer>
+      <CardContainer for="All Over">
         <LineChart
           allDatesArr={allDatesArr}
           totalExpenseArr={totalExpenseArr}
