@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./UserProfile.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  fetchPayment,
   sendEmailVerification,
   updateProfile,
 } from "../../Store/Reducer/authReducer";
@@ -53,6 +54,18 @@ function UserProfile(props) {
       setLoader(true);
       dispatch(updateProfile(name, phone, password, setLoader, setToggleEdit));
     }
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                              ON CODE ADD CLICK                             */
+  /* -------------------------------------------------------------------------- */
+  const onCodeAdd = (e) => {
+    e.preventDefault();
+    const enteredCode = prompt("Enter Your Rozorpay Code:-");
+    if (enteredCode.trim() === "") {
+      return;
+    }
+    dispatch(fetchPayment(enteredCode));
   };
 
   return (
@@ -140,6 +153,7 @@ function UserProfile(props) {
             Become a primium to download all data
           </a>
         )}
+        <p onClick={onCodeAdd}>Click to add code</p>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { CREATE_USER, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
+import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
 import { fetchTotal } from "./totalReducer";
 
@@ -250,6 +250,19 @@ export const sendForgotPassword = (email, setLoader, setOnForgot) => {
             console.log(error);
             setLoader(false)
             setOnForgot(false)
+        }
+    }
+}
+
+
+//! FETCH PAYMENT
+export const fetchPayment = (paymentCode) => {
+    return async (dispatch, getState) => {
+        try {
+            const { data } = await axios.get(`${FETCH_PAYMENT}/${paymentCode}`, AUTH_DETAILS)
+            console.log(data);
+        } catch (error) {
+            console.log(error);
         }
     }
 }
