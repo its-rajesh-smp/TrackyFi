@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
 import { fetchTotal, increamentExpense, increamentCredit, decreamentCredit, decreamentExpense } from "./totalReducer";
+import generate_txt from "../../Functions/generate_txt";
 
 const transectionReducer = createSlice({
     name: "transections",
@@ -12,12 +13,15 @@ const transectionReducer = createSlice({
         },
         fetchExpense: (state, action) => {
             state.expense = action.payload
+        },
+        setBlob: (state, action) => {
+            state.blob = action.payload
         }
     }
 })
 
 
-export const { addExpense, fetchExpense } = transectionReducer.actions
+export const { addExpense, fetchExpense, setBlob } = transectionReducer.actions
 export default transectionReducer
 
 
@@ -127,5 +131,15 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
             setLoader(false)
             console.log(error);
         }
+    }
+}
+
+
+//! ON DOWNLOAD
+export const onDownload = () => {
+    return (dispatch, getState) => {
+        const allTransections = getState().transectionReducer.expense
+        const userDetails = getState().authReducer
+        generate_txt(allTransections, userDetails)
     }
 }

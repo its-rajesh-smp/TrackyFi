@@ -6,6 +6,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "../../Store/Reducer/authReducer";
+import { onDownload } from "../../Store/Reducer/transectionReducer";
 
 function UserProfile(props) {
   const selector = useSelector((state) => state.authReducer);
@@ -66,6 +67,15 @@ function UserProfile(props) {
       return;
     }
     dispatch(fetchPayment(enteredCode));
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                            ON DOWNLOAD BTN CLICK                           */
+  /* -------------------------------------------------------------------------- */
+
+  const onDownloadHandeler = (e) => {
+    e.preventDefault();
+    dispatch(onDownload());
   };
 
   return (
@@ -139,7 +149,13 @@ function UserProfile(props) {
           {toggleEdit && <button onClick={onCancle}>CANCLE</button>}
         </div>
 
-        {selector.VIP && <button className="downloadBTN">DOWNLOAD</button>}
+        {selector.VIP && (
+          <>
+            <button onClick={onDownloadHandeler} className="downloadBTN">
+              DOWNLOAD
+            </button>
+          </>
+        )}
 
         {!selector.emailVerified && (
           <p>Verify your account to use 100% of our app</p>
