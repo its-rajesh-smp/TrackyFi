@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUserfunc } from "../../Store/Reducer/authReducer";
 
 function Header(props) {

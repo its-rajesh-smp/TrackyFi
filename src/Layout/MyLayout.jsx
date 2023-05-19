@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Header from "../Components/Header/Header";
 import Login from "../Pages/Login/Login";
 import CompleteProfile from "../Pages/Complete Profile/CompleteProfile";
+import Theme from "../Components/Theme/Theme";
 
 function MyLayout(props) {
   const isAuth = useSelector((state) => state.authReducer.isAuth);
@@ -12,6 +13,7 @@ function MyLayout(props) {
 
   return (
     <>
+      <Theme />
       {isVerified && <Header />}
       {!isAuth && <Login />}
       {!isVerified && isAuth && <CompleteProfile />}

@@ -3,7 +3,6 @@
   display: grid;
   grid-template-rows: 0.27fr 1fr;
   height: 100vh;
-  background-color: white;
   width: 100%;
 }
 
@@ -85,7 +84,6 @@
   font-family: roboto;
   font-size: 1rem;
   background-color: #1877f2;
-  color: white;
   height: 2.8125rem;
   font-weight: 500;
   width: fit-content;
@@ -93,6 +91,7 @@
   border-radius: 0.3125rem;
   border: none;
   margin: 1.25rem 0px;
+  color: white;
 }
 .Login-div__form .Login-div__form_switch p {
   font-size: 1rem;

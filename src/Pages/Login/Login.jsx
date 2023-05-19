@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createUserfunc,
   sendForgotPassword,
 } from "../../Store/Reducer/authReducer";
 
 function Login(props) {
+  const theme = useSelector((state) => state.themeReducer.theme);
   const dispatch = useDispatch();
   const [switchLogin, setSwitchLogin] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); 
   const [loader, setLoader] = useState(false);
   const [onForgot, setOnForgot] = useState(false);
 
@@ -60,7 +61,7 @@ function Login(props) {
   };
 
   return (
-    <div className=" Login-div">
+    <div className={` Login-div ${theme}`}>
       <div className="Login-div__topDiv">
         <h1>expense tracker</h1>
       </div>

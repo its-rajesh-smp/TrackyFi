@@ -50,3 +50,29 @@ a {
     font-size: toper(10);
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                    THEME                                   */
+/* -------------------------------------------------------------------------- */
+@keyframes dark_light {
+  to {
+    color: black;
+    background-color: white;
+  }
+}
+.lightMode {
+  animation-duration: 1s;
+  animation-name: dark_light;
+}
+
+.darkMode {
+  animation-duration: 1s;
+  animation-name: light_dark;
+  animation-fill-mode: forwards;
+}
+@keyframes light_dark {
+  to {
+    color: white;
+    background-color: #040303;
+  }
+}

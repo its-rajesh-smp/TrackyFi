@@ -16,6 +16,7 @@
 
 .AddEditCard-div {
   background-color: #e3dffd;
+  color: black;
   padding: 3.125rem 3.125rem;
   display: flex;
   height: fit-content;

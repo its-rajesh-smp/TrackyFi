@@ -9,20 +9,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: antiquewhite;
     border-radius: torem(5px);
     width: 100%;
     input {
       width: 100%;
       height: torem(30px);
       border: none;
-      background-color: antiquewhite;
       padding-left: torem(5px);
       outline: none;
       border-radius: torem(5px);
     }
     input::placeholder {
       font-family: "Poppins", sans-serif;
+      color: black;
     }
     i {
       margin: 0px torem(10px);

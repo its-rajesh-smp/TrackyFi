@@ -4,7 +4,7 @@
   display: grid;
   grid-template-rows: 0.27fr 1fr;
   height: 100vh;
-  background-color: white;
+
   width: 100%;
 }
 .Login-div__topDiv {
@@ -55,6 +55,7 @@
         font-weight: 500;
         border-radius: torem(5px);
         border: none;
+
         background-color: $mygrey;
         gap: torem(5px);
         i {
@@ -85,7 +86,6 @@
     font-family: roboto;
     font-size: torem(16px);
     background-color: $myblue;
-    color: white;
     height: torem(45px);
     font-weight: 500;
     width: fit-content;
@@ -93,6 +93,7 @@
     border-radius: torem(5px);
     border: none;
     margin: torem(20px) 0px;
+    color: white;
   }
   .Login-div__form_switch {
     p {
