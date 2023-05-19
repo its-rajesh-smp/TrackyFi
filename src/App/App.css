@@ -54,7 +54,7 @@ a {
 /* -------------------------------------------------------------------------- */
 @keyframes dark_light {
   to {
-    color: black;
+    color: #040303;
     background-color: white;
   }
 }

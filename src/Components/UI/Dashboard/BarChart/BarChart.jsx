@@ -9,30 +9,17 @@ function BarChart(props) {
         className="myCHart"
         type="bar"
         data={{
-          labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "Aug",
-            "Sept",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
+          labels: props.monthDatesArr,
           datasets: [
             {
-              backgroundColor: "green",
-              data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-              barThickness: "15",
+              label: "Total Expense",
+              backgroundColor: "red",
+              data: props.thisMonthExpense,
             },
             {
-              backgroundColor: "red",
-              data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
-              barThickness: "15",
+              label: "Total Credit",
+              backgroundColor: "green",
+              data: props.thisMonthCredit,
             },
           ],
         }}

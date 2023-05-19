@@ -6,22 +6,14 @@ function MiniCard(props) {
   return (
     <div className=" MiniCard-div ">
       <div className="MiniCard-div__div">
-        <h3>Hello</h3>
-        <h1>89</h1>
+        <h3>{props.for}</h3>
+        <h1>{props.total}</h1>
       </div>
       <ShowOnDesktop>
         <CChart
           type="line"
           data={{
-            labels: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-            ],
+            labels: [1, 2, 3, 4, 5, 6, 7],
             datasets: [
               {
                 label: "My First dataset",
@@ -29,7 +21,7 @@ function MiniCard(props) {
                 borderColor: "rgba(220, 220, 220, 1)",
                 pointBackgroundColor: "green",
                 pointBorderColor: "green",
-                data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+                data: props.credit,
               },
               {
                 label: "My Second dataset",
@@ -37,7 +29,7 @@ function MiniCard(props) {
                 borderColor: "rgba(151, 187, 205, 1)",
                 pointBackgroundColor: "red",
                 pointBorderColor: "red",
-                data: [50, 12, 28, 29, 7, 25, 12, 70, 60],
+                data: props.expense,
               },
             ],
           }}
