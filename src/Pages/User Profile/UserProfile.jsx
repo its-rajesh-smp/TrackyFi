@@ -1,15 +1,59 @@
 import React, { useState } from "react";
 import "./UserProfile.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  sendEmailVerification,
+  updateProfile,
+} from "../../Store/Reducer/authReducer";
 
 function UserProfile(props) {
   const selector = useSelector((state) => state.authReducer);
-  console.log(selector);
+  const dispatch = useDispatch();
 
   const [name, setName] = useState(selector.userName);
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(selector.email);
+  const [phone, setPhone] = useState(selector.userMobile);
+  const [password, setPassword] = useState("************");
+  const [loader, setLoader] = useState(false);
+  const [toggleEdit, setToggleEdit] = useState(false);
+
+  /* -------------------------------------------------------------------------- */
+  /*                             ON VERIFY BTN CLICK                            */
+  /* -------------------------------------------------------------------------- */
+  const onVerify = (e) => {
+    e.preventDefault();
+    if (!loader) {
+      setLoader(true);
+      dispatch(sendEmailVerification(setLoader));
+    }
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                              ON EDIT BTN CLICK                             */
+  /* -------------------------------------------------------------------------- */
+  const onEdit = (e) => {
+    e.preventDefault();
+    setToggleEdit((p) => !p);
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                             ON CANCLE BTN CLICK                            */
+  /* -------------------------------------------------------------------------- */
+  const onCancle = (e) => {
+    e.preventDefault();
+    setToggleEdit(false);
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                              ON SAVE BTN CLICK                             */
+  /* -------------------------------------------------------------------------- */
+  const onSave = (e) => {
+    e.preventDefault();
+    if (!loader) {
+      setLoader(true);
+      dispatch(updateProfile(name, phone, password, setLoader, setToggleEdit));
+    }
+  };
 
   return (
     <div className=" UserProfile-div ">
@@ -22,7 +66,10 @@ function UserProfile(props) {
       />
 
       <form>
+        {loader && <i className="bx bx-loader-circle bx-spin"></i>}
+
         <input
+          disabled={!toggleEdit}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -33,6 +80,7 @@ function UserProfile(props) {
         />
 
         <input
+          disabled={true}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -43,6 +91,7 @@ function UserProfile(props) {
         />
 
         <input
+          disabled={!toggleEdit}
           onChange={(e) => {
             setPhone(e.target.value);
           }}
@@ -53,6 +102,7 @@ function UserProfile(props) {
         />
 
         <input
+          disabled={!toggleEdit}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -63,13 +113,22 @@ function UserProfile(props) {
         />
 
         <div className="btnGroup">
-          {!selector.isEmailVerified && <button>VERIFY</button>}
-          <button>SAVE</button>
+          {!selector.emailVerified && (
+            <button onClick={onVerify}>VERIFY YOUR EMAIL</button>
+          )}
+          <button
+            onClick={toggleEdit ? onSave : onEdit}
+            disabled={!selector.emailVerified}
+          >
+            {toggleEdit ? "SAVE" : "EDIT"}
+          </button>
+
+          {toggleEdit && <button onClick={onCancle}>CANCLE</button>}
         </div>
 
         {selector.VIP && <button className="downloadBTN">DOWNLOAD</button>}
 
-        {!selector.isEmailVerified && (
+        {!selector.emailVerified && (
           <p>Verify your account to use 100% of our app</p>
         )}
 

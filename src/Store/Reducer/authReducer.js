@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { CREATE_USER, GET_USER, LOGIN_USER, UPDATE_USER, USERS } from "../../Firebase/APIURL";
+import { CREATE_USER, GET_USER, LOGIN_USER, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
 import { fetchTotal } from "./totalReducer";
 
@@ -21,12 +21,13 @@ const authReducer = createSlice({
         },
         verifyUser: (state, action) => {
             Object.assign(state, action.payload)
-
         },
         fetchUser: (state, action) => {
             Object.assign(state, action.payload)
             state.isAuth = true
-
+        },
+        updateUser: (state, action) => {
+            Object.assign(state, action.payload)
         },
         logoutUser: () => {
             return {
@@ -38,7 +39,7 @@ const authReducer = createSlice({
 
 })
 
-export const { authUser, verifyUser, fetchUser, logoutUser } = authReducer.actions
+export const { authUser, verifyUser, fetchUser, logoutUser, updateUser } = authReducer.actions
 export default authReducer
 
 /* -------------------------------------------------------------------------- */
@@ -64,7 +65,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 localStorage.setItem("trackfyUser", authData.idToken)
                 const userEmail = authData.email.replace(".", "").replace("@", "")
                 const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
-
+                const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken })
 
                 // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
                 const userTransections = userData.transections === undefined ? {} : userData.transections
@@ -87,7 +88,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
 
                 // Before Dispatch removing the transection field
                 delete userData.transections
-                const newUserDataObj = { ...authData, ...userData }
+                const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
 
                 dispatch(fetchUser(newUserDataObj))
                 setLoader(false)
@@ -160,7 +161,7 @@ export const fetchUsefunc = (setLoading) => {
 export const verifyUserfunc = (name, mobile, setLoading) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.userData.email.replace(".", "").replace("@", "")
+            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
             const { data } = await axios.patch(`${USERS}/${userEmail}.json`, { isVerified: true, userName: name, userMobile: mobile })
             dispatch(verifyUser(data))
             setLoading(false)
@@ -177,5 +178,60 @@ export const logoutUserfunc = () => {
     return (dispatch) => {
         localStorage.clear("trackfyUser")
         dispatch(logoutUser())
+    }
+}
+
+
+//! SEND EMAIL VERIFICATION
+export const sendEmailVerification = (setLoader) => {
+    return async (dispatch, getState) => {
+        const idToken = getState().authReducer.idToken
+        try {
+            const { data } = await axios.post(SEND_VERIFY_LINK, { idToken: idToken, requestType: "VERIFY_EMAIL" })
+            console.log(data);
+            setLoader(false)
+        } catch (error) {
+            console.log(error);
+            setLoader(false)
+        }
+    }
+}
+
+//! UPDATE PROFILE
+export const updateProfile = (name, phone, password, setLoader, setToggleEdit) => {
+    return async (dispatch, getState) => {
+        try {
+
+            const currentUserData = getState().authReducer
+            const idToken = currentUserData.idToken
+            const currentEmail = currentUserData.email.replace(".", "").replace("@", "")
+            const currentUserName = currentUserData.userName
+            const currentUserPhone = currentUserData.userMobile
+
+            if (currentUserName !== name || currentUserPhone !== phone) {
+
+                const { data: userUpdateRes } = await axios.patch(`${USERS}/${currentEmail}.json`, {
+                    userName: name,
+                    userMobile: phone
+                })
+                dispatch(updateUser(userUpdateRes))
+            }
+            if (password !== "************") {
+                const { data: passwordUpdateRes } = await axios.post(UPDATE_USER,
+                    {
+                        idToken: idToken,
+                        password: password,
+                        returnSecureToken: true,
+                    })
+                dispatch(logoutUserfunc())
+            }
+            setLoader(false)
+            setToggleEdit(false)
+
+        } catch (error) {
+            console.log(error);
+            setLoader(false)
+            setToggleEdit(false)
+        }
     }
 }

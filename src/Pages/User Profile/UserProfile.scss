@@ -9,6 +9,7 @@
   width: 30%;
   margin-right: auto;
   gap: torem(20px);
+  position: relative;
   .UserProfileImg {
     width: torem(150px);
   }
@@ -18,6 +19,14 @@
     width: 100%;
     gap: torem(5px);
     align-items: center;
+    .bx-loader-circle {
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      position: absolute;
+      background-color: unset;
+      font-size: torem(50px);
+    }
     input {
       background-color: aliceblue;
       border: none;

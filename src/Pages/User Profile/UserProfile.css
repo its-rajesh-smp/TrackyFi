@@ -8,6 +8,7 @@
   width: 30%;
   margin-right: auto;
   gap: 1.25rem;
+  position: relative;
 }
 .UserProfile-div .UserProfileImg {
   width: 9.375rem;
@@ -18,6 +19,14 @@
   width: 100%;
   gap: 0.3125rem;
   align-items: center;
+}
+.UserProfile-div form .bx-loader-circle {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  background-color: unset;
+  font-size: 3.125rem;
 }
 .UserProfile-div form input {
   background-color: aliceblue;
