@@ -12,3 +12,4 @@ export const USERS = "https://trackyfi-a3960-default-rtdb.asia-southeast1.fireba
 export const CHANGE_EMAIL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
 export const CHANGE_PASSWORD = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
 export const UPDATE_USER = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
+export const PASSWORD_RESET = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`

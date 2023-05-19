@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { CREATE_USER, GET_USER, LOGIN_USER, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
+import { CREATE_USER, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
 import { fetchTotal } from "./totalReducer";
 
@@ -188,7 +188,6 @@ export const sendEmailVerification = (setLoader) => {
         const idToken = getState().authReducer.idToken
         try {
             const { data } = await axios.post(SEND_VERIFY_LINK, { idToken: idToken, requestType: "VERIFY_EMAIL" })
-            console.log(data);
             setLoader(false)
         } catch (error) {
             console.log(error);
@@ -208,6 +207,8 @@ export const updateProfile = (name, phone, password, setLoader, setToggleEdit) =
             const currentUserName = currentUserData.userName
             const currentUserPhone = currentUserData.userMobile
 
+            // Checking if user only want to update the password or want to update the name and phone
+            // by this check i am reducing the api call
             if (currentUserName !== name || currentUserPhone !== phone) {
 
                 const { data: userUpdateRes } = await axios.patch(`${USERS}/${currentEmail}.json`, {
@@ -232,6 +233,23 @@ export const updateProfile = (name, phone, password, setLoader, setToggleEdit) =
             console.log(error);
             setLoader(false)
             setToggleEdit(false)
+        }
+    }
+}
+
+
+//! SEND FORGOT PASSWORD LINK
+export const sendForgotPassword = (email, setLoader, setOnForgot) => {
+    return async (dispatch, getState) => {
+        try {
+            const { data } = await axios.post(PASSWORD_RESET, { email: email, requestType: "PASSWORD_RESET" })
+            console.log("DATA")
+            setLoader(false)
+            setOnForgot(false)
+        } catch (error) {
+            console.log(error);
+            setLoader(false)
+            setOnForgot(false)
         }
     }
 }

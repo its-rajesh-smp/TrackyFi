@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useDispatch } from "react-redux";
-import { createUserfunc } from "../../Store/Reducer/authReducer";
+import {
+  createUserfunc,
+  sendForgotPassword,
+} from "../../Store/Reducer/authReducer";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -9,11 +12,13 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
+  const [onForgot, setOnForgot] = useState(false);
 
   /* -------------------------------------------------------------------------- */
   /*                                SWICTH LOGIN                                */
   /* -------------------------------------------------------------------------- */
   const onSwitchLoginHandeler = () => {
+    setOnForgot(false);
     setSwitchLogin((p) => !p);
   };
 
@@ -35,6 +40,25 @@ function Login(props) {
     }
   };
 
+  /* -------------------------------------------------------------------------- */
+  /*                               ON FORGOT CLICK                              */
+  /* -------------------------------------------------------------------------- */
+  const onForgotBtnClick = (e) => {
+    e.preventDefault();
+    setOnForgot((p) => !p);
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                          ON SEND FORGOT LINK CLICK                         */
+  /* -------------------------------------------------------------------------- */
+  const onSendForgotLink = (e) => {
+    e.preventDefault();
+    if (!loader) {
+      setLoader(true);
+      dispatch(sendForgotPassword(email, setLoader, setOnForgot));
+    }
+  };
+
   return (
     <div className=" Login-div">
       <div className="Login-div__topDiv">
@@ -43,13 +67,19 @@ function Login(props) {
 
       <div className="Login-div__div">
         <div className="Login-div__middleDiv">
-          <h1>{switchLogin ? "Login" : "Create Account"}</h1>
+          <h1>
+            {switchLogin
+              ? onForgot
+                ? "Forgot Password"
+                : "Login"
+              : "Create Account"}
+          </h1>
           <div className="GoogleBtnContainer">
             <button>
               <i className="bx bxl-google"></i>Google
             </button>
             <div className="lineContainer">
-              <p className="lines"></p>Or {switchLogin ? "login" : "connect"}
+              <p className="lines"></p>Or {switchLogin ? "login " : "connect "}
               with
               <p className="lines"></p>
             </div>
@@ -69,25 +99,46 @@ function Login(props) {
           </div>
 
           <div className="Login-div__form_inpDiv">
-            <label htmlFor="Password">Password</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              type="text"
-              placeholder="Password"
-              name=""
-              id=""
-            />
+            {!onForgot && (
+              <>
+                <label htmlFor="Password">Password</label>
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="text"
+                  placeholder="Password"
+                  name=""
+                  id=""
+                />
+              </>
+            )}
+            {switchLogin && !onForgot && (
+              <p onClick={onForgotBtnClick} className="forgotPass">
+                Forgot Password
+              </p>
+            )}
           </div>
 
-          <button onClick={onContinueBtnClick}>
-            {loader ? (
-              <i className="bx bx-loader-circle bx-spin"></i>
-            ) : switchLogin ? (
-              "Sign In"
-            ) : (
-              "Sign Up"
-            )}
-          </button>
+          {!onForgot && (
+            <button onClick={onContinueBtnClick}>
+              {loader ? (
+                <i className="bx bx-loader-circle bx-spin"></i>
+              ) : switchLogin ? (
+                "Sign In"
+              ) : (
+                "Sign Up"
+              )}
+            </button>
+          )}
+
+          {onForgot && (
+            <button onClick={onSendForgotLink}>
+              {loader ? (
+                <i className="bx bx-loader-circle bx-spin"></i>
+              ) : (
+                "Send Forgot Password Link"
+              )}
+            </button>
+          )}
 
           <div className="Login-div__form_switch">
             <p>

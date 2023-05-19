@@ -105,6 +105,12 @@
   }
 }
 
+.forgotPass {
+  font-size: torem(12px);
+  margin-top: torem(5px);
+  color: red;
+}
+
 //? Media
 /* Smartphones  */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
