@@ -10,6 +10,7 @@ import {
 
 function AddEditCard(props) {
   const selector = useSelector((state) => state.toggleAddEdit);
+
   const [name, setName] = useState(selector.data.name);
   const [date, setDate] = useState(selector.data.date);
   const [time, setTime] = useState(selector.data.time);
@@ -29,8 +30,13 @@ function AddEditCard(props) {
   /* -------------------------------------------------------------------------- */
   /*                                 ADD EXPENSE                                */
   /* -------------------------------------------------------------------------- */
+  const isVIP = useSelector((state) => state.authReducer.VIP);
   const onAddExpenseHandeler = (e) => {
     if (name === "" || date === "" || price === "") {
+      return;
+    }
+    if (Number(price) > 5000 && (!isVIP || isVIP === undefined)) {
+      alert("OOPS! BUY VIP TO ADD MORE THEN 5000");
       return;
     }
     if (!loader) {

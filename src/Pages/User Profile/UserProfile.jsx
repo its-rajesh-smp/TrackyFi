@@ -146,14 +146,16 @@ function UserProfile(props) {
         )}
 
         {!selector.VIP && (
-          <a
-            href="https://pages.razorpay.com/pl_LqZNxW1c4Uvlx6/view"
-            target="_blank"
-          >
-            Become a primium to download all data
-          </a>
+          <>
+            <a
+              href="https://pages.razorpay.com/pl_LqZNxW1c4Uvlx6/view"
+              target="_blank"
+            >
+              Become a primium to download all data
+            </a>
+            <p onClick={onCodeAdd}>Click to add code</p>
+          </>
         )}
-        <p onClick={onCodeAdd}>Click to add code</p>
       </form>
     </div>
   );
