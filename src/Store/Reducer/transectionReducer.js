@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
-import { fetchTotal, increamentExpense, increamentCredit, decreamentCredit, decreamentExpense } from "./totalReducer";
 import generate_txt from "../../Functions/generate_txt";
 
 const transectionReducer = createSlice({
@@ -38,12 +37,7 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
             const responseId = data.name
             const newObj = { ...expenseData, id: responseId }
             dispatch(addExpense(newObj))
-            if (expenseData.type === "credit") {
-                dispatch(increamentCredit(expenseData.price))
-            }
-            else {
-                dispatch(increamentExpense(expenseData.price))
-            }
+
             setLoader(false)
             onCloseBtnHandeler()
 
@@ -66,18 +60,10 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
             const { data } = await axios.delete(`${USERS}/${userEmail}/transections/${expenseId}.json`)
             const prevData = getState().transectionReducer.expense
             const updatedDataArray = prevData.filter((expesnes) => {
-                if (expesnes.id === expenseId) {
-                    if (expesnes.type === "credit") {
-                        dispatch(decreamentCredit(expesnes.price))
-                    }
-                    else {
-                        dispatch(decreamentExpense(expesnes.price))
-                    }
-                }
-                else {
-
+                if (expesnes.id !== expenseId) {
                     return true
                 }
+
             })
             dispatch(fetchExpense(updatedDataArray))
             setLoader(false)
@@ -99,24 +85,6 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
             const { data } = await axios.put(`${USERS}/${userEmail}/transections/${expenseId}.json`, expenseData)
             const updatedDataArray = prevData.map((val) => {
                 if (val.id === expenseId) {
-                    if (val.type === "credit") {
-                        dispatch(decreamentCredit(val.price))
-                        if (expenseData.type === "credit") {
-                            dispatch(increamentCredit(val.price))
-                        }
-                        else {
-                            dispatch(increamentExpense(val.price))
-                        }
-                    }
-                    else {
-                        dispatch(decreamentExpense(val.price))
-                        if (expenseData.type === "credit") {
-                            dispatch(increamentCredit(val.price))
-                        }
-                        else {
-                            dispatch(increamentExpense(val.price))
-                        }
-                    }
                     return { ...data, id: expenseId }
                 }
                 else {

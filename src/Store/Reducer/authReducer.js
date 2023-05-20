@@ -122,9 +122,9 @@ export const fetchUsefunc = (setLoading) => {
             const userTransections = userData.transections === undefined ? {} : userData.transections
 
             const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
-
                 return { ...userTransections[expenseId], id: expenseId }
             })
+
 
             // DISPATCH TRANSECTIONS
             dispatch(fetchExpense(newExpenseArr))
