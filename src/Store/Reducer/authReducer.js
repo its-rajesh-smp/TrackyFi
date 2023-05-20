@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
+import { fetchCategory } from "./categoryReducer";
 
 
 
@@ -67,21 +68,26 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
                 const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken })
 
-                // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
+                // PREPAIRE FOR DISPATCH TRANSECTIONS
                 const userTransections = userData.transections === undefined ? {} : userData.transections
 
                 const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
-
                     return { ...userTransections[expenseId], id: expenseId }
                 })
 
+                // PREPARING CATEGORY ARRAY
+                const newCategoryArr = Object.values(userData.category === undefined ? {} : userData.category)
+
                 // DISPATCH TRANSECTIONS
                 dispatch(fetchExpense(newExpenseArr))
+                dispatch(fetchCategory(newCategoryArr))
+
 
 
 
                 // Before Dispatch removing the transection field
                 delete userData.transections
+                delete userData.category
                 const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
 
                 dispatch(fetchUser(newUserDataObj))
@@ -125,14 +131,22 @@ export const fetchUsefunc = (setLoading) => {
                 return { ...userTransections[expenseId], id: expenseId }
             })
 
+            // PREPARING CATEGORY ARRAY
+            const newCategoryArr = Object.keys(userData.category === undefined ? {} : userData.category).map((id) => {
+                return { id: id, name: userData.category[id].name }
+            })
 
-            // DISPATCH TRANSECTIONS
+            // DISPATCH
+            dispatch(fetchCategory(newCategoryArr))
             dispatch(fetchExpense(newExpenseArr))
+
+
 
             // DISPATCH USER
 
             // Before Dispatch removing the transection field
             delete userData.transections
+            delete userData.category
             const newUserDataObj = { ...userAuth, ...userData, idToken: localToken }
 
             dispatch(fetchUser(newUserDataObj))

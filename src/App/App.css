@@ -58,11 +58,6 @@ a {
     background-color: white;
   }
 }
-.lightMode {
-  animation-duration: 1s;
-  animation-name: dark_light;
-}
-
 .darkMode {
   animation-duration: 1s;
   animation-name: light_dark;

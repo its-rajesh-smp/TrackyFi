@@ -5,6 +5,7 @@ import transectionReducer from "../Reducer/transectionReducer";
 import totalReducer from "../Reducer/totalReducer";
 import themeReducer from "../Reducer/themeReducer";
 import searchReducer from "../Reducer/searchReducer";
+import categoryReducer from "../Reducer/categoryReducer";
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         transectionReducer: transectionReducer.reducer,
         totalReducer: totalReducer.reducer,
         themeReducer: themeReducer.reducer,
-        searchReducer: searchReducer.reducer
+        searchReducer: searchReducer.reducer,
+        categoryReducer: categoryReducer.reducer
     }
 })
 export default store

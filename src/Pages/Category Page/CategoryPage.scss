@@ -1,0 +1,39 @@
+@import "../../Styles/color";
+.CategoryPage-div {
+  font-family: poppins;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: torem(20px);
+  ul {
+    list-style: none;
+    display: flex;
+    margin-top: torem(20px);
+    flex-direction: column;
+    gap: torem(5px);
+  }
+}
+
+.CategoryPage-div__addCate {
+  display: flex;
+  margin: torem(20px) 0px;
+  input,
+  button {
+    padding: torem(10px);
+  }
+  input {
+    width: 100%;
+  }
+  button {
+    width: 20%;
+  }
+}
+
+.CategoryPage-div__chartContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -10,6 +10,9 @@ import {
 
 function AddEditCard(props) {
   const selector = useSelector((state) => state.toggleAddEdit);
+  const categoryList = useSelector(
+    (state) => state.categoryReducer.categoryArr
+  );
 
   const [name, setName] = useState(selector.data.name);
   const [date, setDate] = useState(selector.data.date);
@@ -134,9 +137,13 @@ function AddEditCard(props) {
           id="cataselect"
         >
           <option value="not selected">Not Selected</option>
-          <option value="book">Book</option>
-          <option value="mobile">Mobile</option>
-          <option value="petrol">Petrol</option>
+          {categoryList.map((category) => {
+            return (
+              <option key={category.id} value={category.name.toLowerCase()}>
+                {category.name}
+              </option>
+            );
+          })}
         </select>
 
         <input
