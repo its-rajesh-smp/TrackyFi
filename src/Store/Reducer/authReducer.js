@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
-import { fetchTotal } from "./totalReducer";
+
 
 
 
@@ -69,22 +69,16 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
 
                 // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
                 const userTransections = userData.transections === undefined ? {} : userData.transections
-                const totalTransection = { totalExpense: 0, totalCredit: 0 }
+
                 const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
-                    if (userTransections[expenseId].type === "credit") {
-                        totalTransection.totalCredit += Number(userTransections[expenseId].price)
-                    }
-                    else {
-                        totalTransection.totalExpense += Number(userTransections[expenseId].price)
-                    }
+
                     return { ...userTransections[expenseId], id: expenseId }
                 })
 
                 // DISPATCH TRANSECTIONS
                 dispatch(fetchExpense(newExpenseArr))
-                // DISPATCH TOTAL
-                dispatch(fetchTotal(totalTransection))
-                // DISPATCH USER
+
+
 
                 // Before Dispatch removing the transection field
                 delete userData.transections
@@ -126,21 +120,15 @@ export const fetchUsefunc = (setLoading) => {
 
             // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
             const userTransections = userData.transections === undefined ? {} : userData.transections
-            const totalTransection = { totalExpense: 0, totalCredit: 0 }
+
             const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
-                if (userTransections[expenseId].type === "credit") {
-                    totalTransection.totalCredit += Number(userTransections[expenseId].price)
-                }
-                else {
-                    totalTransection.totalExpense += Number(userTransections[expenseId].price)
-                }
+
                 return { ...userTransections[expenseId], id: expenseId }
             })
 
             // DISPATCH TRANSECTIONS
             dispatch(fetchExpense(newExpenseArr))
-            // DISPATCH TOTAL
-            dispatch(fetchTotal(totalTransection))
+
             // DISPATCH USER
 
             // Before Dispatch removing the transection field
