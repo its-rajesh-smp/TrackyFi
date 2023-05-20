@@ -27,7 +27,7 @@ function CategoryPage(props) {
         <h3>Your Categorys</h3>
 
         {selector.map((category) => {
-          return <CategoryItem category={category} />;
+          return <CategoryItem key={Math.random()} category={category} />;
         })}
       </ul>
 

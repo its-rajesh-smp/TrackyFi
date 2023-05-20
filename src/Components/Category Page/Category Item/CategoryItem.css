@@ -1,6 +1,7 @@
 .CategoryItem-Li {
   background-color: gainsboro;
   display: flex;
+  color: black;
   justify-content: space-between;
   padding: 0.3125rem 0.625rem;
 }/*# sourceMappingURL=CategoryItem.css.map */

@@ -22,6 +22,7 @@
 .CategoryPage-div__addCate input,
 .CategoryPage-div__addCate button {
   padding: 0.625rem;
+  font-size: 1rem;
 }
 .CategoryPage-div__addCate input {
   width: 100%;
@@ -35,4 +36,17 @@
   height: 100%;
   display: flex;
   justify-content: center;
+}
+
+/* Smartphones  */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .CategoryPage-div {
+    width: 100%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 480px) and (max-device-width: 1080px) {
+  .CategoryPage-div {
+    width: 70%;
+  }
 }/*# sourceMappingURL=CategoryPage.css.map */
