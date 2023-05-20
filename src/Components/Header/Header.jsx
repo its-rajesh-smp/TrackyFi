@@ -21,7 +21,7 @@ function Header(props) {
           <i className="bx bx-stats"></i>
         </NavLink>
 
-        <NavLink>
+        <NavLink to={"/category"}>
           <i className="bx bxs-category"></i>
         </NavLink>
       </div>

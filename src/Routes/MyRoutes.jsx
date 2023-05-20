@@ -14,8 +14,9 @@ function MyRoutes(props) {
     <Routes>
       {isVarified && (
         <>
-          <Route path="/" element={<CategoryPage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/user" element={<UserProfile />} />
+          <Route path="/category" element={<CategoryPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<HomePage />} />
         </>
