@@ -4,6 +4,7 @@ import toggleAddEditExpense from "../Reducer/toggleAddEditExpense";
 import transectionReducer from "../Reducer/transectionReducer";
 import totalReducer from "../Reducer/totalReducer";
 import themeReducer from "../Reducer/themeReducer";
+import searchReducer from "../Reducer/searchReducer";
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         toggleAddEdit: toggleAddEditExpense.reducer,
         transectionReducer: transectionReducer.reducer,
         totalReducer: totalReducer.reducer,
-        themeReducer: themeReducer.reducer
+        themeReducer: themeReducer.reducer,
+        searchReducer: searchReducer.reducer
     }
 })
 export default store

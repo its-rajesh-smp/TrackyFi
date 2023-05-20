@@ -27,12 +27,11 @@
       margin: 0px torem(10px);
     }
   }
-  select {
-    border-color: gainsboro;
+  .dateinput {
     width: 40%;
     font-family: "Poppins", sans-serif;
     height: torem(30px);
-    border-radius: torem(5px);
+    font-size: torem(12px);
     padding: 0px torem(10px);
   }
 }

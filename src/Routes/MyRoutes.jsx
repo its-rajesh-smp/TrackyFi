@@ -16,6 +16,7 @@ function MyRoutes(props) {
           <Route path="/" element={<HomePage />} />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<HomePage />} />
         </>
       )}
     </Routes>

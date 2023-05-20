@@ -1,8 +1,10 @@
 import React, { memo } from "react";
 import "./FilterField.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter, setSearch } from "../../../../Store/Reducer/searchReducer";
 function FilterField() {
   const selector = useSelector((state) => state.themeReducer.bool);
+  const dispatch = useDispatch();
 
   const style = {
     backgroundColor: `${selector ? "#BC6FF1" : "#F2F7A1"}`,
@@ -13,18 +15,18 @@ function FilterField() {
       <div style={style}>
         <i className="bx bx-search-alt"></i>
         <input
+          onChange={(e) => dispatch(setSearch(e.target.value))}
           style={style}
           type="text"
           placeholder="Search.."
           defaultValue=""
         />
       </div>
-      <select className="filterSelect">
-        <option>Filter</option>
-        <option>Today</option>
-        <option>YesterDay</option>
-        <option>Tomorrow</option>
-      </select>
+      <input
+        onChange={(e) => dispatch(setFilter(e.target.value))}
+        className="dateinput"
+        type="date"
+      />
     </div>
   );
 }

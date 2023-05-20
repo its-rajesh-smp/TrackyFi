@@ -27,11 +27,10 @@
 .input_fields div i {
   margin: 0px 0.625rem;
 }
-.input_fields select {
-  border-color: gainsboro;
+.input_fields .dateinput {
   width: 40%;
   font-family: "Poppins", sans-serif;
   height: 1.875rem;
-  border-radius: 0.3125rem;
+  font-size: 0.75rem;
   padding: 0px 0.625rem;
 }/*# sourceMappingURL=FilterField.css.map */
