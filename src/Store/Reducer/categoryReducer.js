@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
+import { setVisiblefunc } from "./notificationReducer";
 
 const categoryReducer = createSlice({
     name: "category",
@@ -35,6 +36,9 @@ export const addCategoryfunc = (enteredCategory, setLoader) => {
             dispatch(setCategory({ id: data.name, name: enteredCategory }))
         } catch (error) {
             console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
+
         }
         setLoader(false)
     }
@@ -54,6 +58,8 @@ export const deleteCategoryfunc = (id, setLoader) => {
             dispatch(deleteCategory(prevList))
         } catch (error) {
             console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
         }
         setLoader(false)
     }

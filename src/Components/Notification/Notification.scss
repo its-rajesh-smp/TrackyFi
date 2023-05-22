@@ -1,0 +1,13 @@
+#notification {
+  position: fixed;
+  left: 0;
+  background-color: rgb(255, 78, 47);
+  right: 0;
+  display: flex;
+  z-index: 10000;
+  align-items: center;
+  font-size: 20px;
+  justify-content: center;
+  font-family: poppins;
+  box-shadow: 1px 2px 5px rgb(255, 147, 47);
+}

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
 import generate_txt from "../../Functions/generate_txt";
+import { setVisiblefunc } from "./notificationReducer";
 
 const transectionReducer = createSlice({
     name: "transections",
@@ -43,8 +44,11 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
 
         } catch (error) {
             setLoader(false)
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
         }
+
     }
 }
 
@@ -71,6 +75,8 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
         } catch (error) {
             setLoader(false)
             console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
         }
     }
 }
@@ -98,6 +104,8 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
         } catch (error) {
             setLoader(false)
             console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
         }
     }
 }

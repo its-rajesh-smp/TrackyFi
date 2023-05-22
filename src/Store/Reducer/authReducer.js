@@ -3,6 +3,7 @@ import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
 import { fetchExpense } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
+import { setVisiblefunc } from "./notificationReducer";
 
 
 
@@ -95,7 +96,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
 
         } catch (error) {
             let message = error.response.data.error.message
-            alert(message)
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
             setLoader(false)
             if (message === "EMAIL_EXISTS" || message === "EMAIL_NOT_FOUND") {
@@ -150,7 +151,8 @@ export const fetchUsefunc = (setLoading) => {
             dispatch(fetchUser(newUserDataObj))
             setLoading(false)
         } catch (error) {
-            console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             setLoading(false)
         }
     }
@@ -166,6 +168,8 @@ export const verifyUserfunc = (name, mobile, setLoading) => {
             dispatch(verifyUser(data))
             setLoading(false)
         } catch (error) {
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
         }
     }
@@ -190,6 +194,8 @@ export const sendEmailVerification = (setLoader) => {
             const { data } = await axios.post(SEND_VERIFY_LINK, { idToken: idToken, requestType: "VERIFY_EMAIL" })
             setLoader(false)
         } catch (error) {
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
             setLoader(false)
         }
@@ -229,6 +235,8 @@ export const updateProfile = (name, phone, password, setLoader, setToggleEdit) =
             setToggleEdit(false)
 
         } catch (error) {
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
             setLoader(false)
             setToggleEdit(false)
@@ -247,6 +255,8 @@ export const sendForgotPassword = (email, setLoader, setOnForgot) => {
             setOnForgot(false)
         } catch (error) {
             console.log(error);
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             setLoader(false)
             setOnForgot(false)
         }
@@ -269,6 +279,8 @@ export const fetchPayment = (paymentCode) => {
             const { data } = await axios.patch(`${USERS}/${userEmail}.json`, { VIP: true })
             dispatch(updateUser(data))
         } catch (error) {
+            let message = error.response.data.error.message
+            dispatch(setVisiblefunc("error", message))
             console.log(error);
         }
     }

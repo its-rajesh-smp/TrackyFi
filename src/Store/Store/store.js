@@ -6,6 +6,7 @@ import totalReducer from "../Reducer/totalReducer";
 import themeReducer from "../Reducer/themeReducer";
 import searchReducer from "../Reducer/searchReducer";
 import categoryReducer from "../Reducer/categoryReducer";
+import notificationReducer from "../Reducer/notificationReducer";
 
 const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
         totalReducer: totalReducer.reducer,
         themeReducer: themeReducer.reducer,
         searchReducer: searchReducer.reducer,
-        categoryReducer: categoryReducer.reducer
+        categoryReducer: categoryReducer.reducer,
+        notificationReducer: notificationReducer.reducer
     }
 })
 export default store

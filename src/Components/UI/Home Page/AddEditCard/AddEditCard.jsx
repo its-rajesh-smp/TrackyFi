@@ -7,6 +7,7 @@ import {
   deleteExpense,
   editExpensefunc,
 } from "../../../../Store/Reducer/transectionReducer";
+import { setVisiblefunc } from "../../../../Store/Reducer/notificationReducer";
 
 function AddEditCard(props) {
   const selector = useSelector((state) => state.toggleAddEdit);
@@ -34,12 +35,14 @@ function AddEditCard(props) {
   /*                                 ADD EXPENSE                                */
   /* -------------------------------------------------------------------------- */
   const isVIP = useSelector((state) => state.authReducer.VIP);
-  const onAddExpenseHandeler = (e) => {
+  const onAddExpenseHandeler = (transectionType) => {
     if (name === "" || date === "" || price === "") {
       return;
     }
-    if (Number(price) > 5000 && (!isVIP || isVIP === undefined)) {
-      alert("OOPS! BUY VIP TO ADD MORE THEN 5000");
+    if (Number(price) >= 5000 && (!isVIP || isVIP === undefined)) {
+      dispatch(
+        setVisiblefunc("", "OOPS! You Have To Buy VIP For This Operation")
+      );
       return;
     }
     if (!loader) {
@@ -50,7 +53,7 @@ function AddEditCard(props) {
         time: time,
         price: price,
         category: category,
-        type: e,
+        type: transectionType,
       };
 
       if (selector.isEdit) {

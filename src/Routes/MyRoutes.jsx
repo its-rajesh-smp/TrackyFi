@@ -25,11 +25,7 @@ function MyRoutes(props) {
         </>
       )}
 
-      {!isAuth && (
-        <>
-          <Route path="*" element={<Login />} />
-        </>
-      )}
+      {!isAuth && <Route path="*" element={<Login />} />}
 
       {!isVerified && isAuth && (
         <Route path="*" element={<CompleteProfile />} />
