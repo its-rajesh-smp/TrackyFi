@@ -68,7 +68,7 @@ function Login(props) {
   return (
     <div className={` Login-div ${theme}`}>
       <div className="Login-div__topDiv">
-        <h1>expense tracker</h1>
+        <h1>trackyFi</h1>
       </div>
 
       <div className="Login-div__div">

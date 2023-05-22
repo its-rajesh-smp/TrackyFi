@@ -49,6 +49,7 @@ function DoughnutChart(props) {
           ],
         }}
         options={{
+          animation: false,
           maintainAspectRatio: false,
           responsive: true,
           plugins: {

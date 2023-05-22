@@ -5,6 +5,7 @@
   z-index: 5;
 }
 .Theme-div i {
+  cursor: pointer;
   margin-right: 0.625rem;
   margin-top: 0.625rem;
   font-size: 1.875rem;
