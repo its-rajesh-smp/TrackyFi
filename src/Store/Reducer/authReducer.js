@@ -261,15 +261,16 @@ export const sendForgotPassword = (email, setLoader, setOnForgot) => {
 export const fetchPayment = (paymentCode) => {
     return async (dispatch, getState) => {
         try {
-            // const { data } = await axios.get('https://api.razorpay.com/v1/payments/pay_LrRQr67nDCIYjr', {
-            //     auth: {
-            //         "username": "rzp_test_mPoNwadW6BCpBy",
-            //         "password": "sgs9uUwqA81IEvL6yjEQn7qa"
-            //     }
-            // })
-            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
-            const { data } = await axios.patch(`${USERS}/${userEmail}.json`, { VIP: true })
-            dispatch(updateUser(data))
+            const { data } = await axios.get('https://api.razorpay.com/v1/payments/pay_LrRQr67nDCIYjr', {
+                auth: {
+                    "username": "rzp_test_mPoNwadW6BCpBy",
+                    "password": "sgs9uUwqA81IEvL6yjEQn7qa"
+                }
+            })
+            console.log(data);
+            // const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
+            // const { data } = await axios.patch(`${USERS}/${userEmail}.json`, { VIP: true })
+            // dispatch(updateUser(data))
         } catch (error) {
             console.log(error);
         }

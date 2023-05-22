@@ -1,7 +1,4 @@
 const generate_txt = (expenseArr, userDetails) => {
-
-
-
     const blobArray = []
 
     //ADDING USER DETAILS
@@ -34,8 +31,6 @@ const generate_txt = (expenseArr, userDetails) => {
     a.href = (file)
     a.download = `${userDetails.userName}_transections.csv`
     a.click()
-
-
 
 }
 
