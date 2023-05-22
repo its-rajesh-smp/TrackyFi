@@ -8,6 +8,7 @@
   box-sizing: border-box;
   border-radius: 0.3125rem;
   justify-content: space-between;
+  cursor: pointer;
 }
 .Transection-div .Transection-div_left .Transection-div_Name {
   font-size: 1rem;

@@ -43,6 +43,7 @@
   background-color: gray;
   border-top-right-radius: 0.3125rem;
   border-bottom-left-radius: 1.25rem;
+  cursor: pointer;
 }
 .AddEditCard-div .bxs-box {
   position: absolute;
@@ -51,11 +52,16 @@
   margin-bottom: 0.3125rem;
   bottom: 0;
   font-size: 1.875rem;
+  cursor: pointer;
   color: rgb(255, 0, 0);
 }
 .AddEditCard-div h3 {
   font-size: 1.25rem;
   margin-bottom: 1.875rem;
+}
+.AddEditCard-div button,
+.AddEditCard-div select {
+  cursor: pointer;
 }
 .AddEditCard-div input,
 .AddEditCard-div button,

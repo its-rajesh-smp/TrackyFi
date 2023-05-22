@@ -10,6 +10,7 @@ function CategoryItem(props) {
   return (
     <li className=" CategoryItem-Li " key={props.category.id}>
       <span>{props.category.name}</span>
+
       <span
         onClick={() => {
           if (!loader) {

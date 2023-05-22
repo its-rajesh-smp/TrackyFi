@@ -85,7 +85,8 @@ function Login(props) {
               <i className="bx bxl-google"></i>Google
             </button>
             <div className="lineContainer">
-              <p className="lines"></p>Or {switchLogin ? "login " : "connect "}
+              <p className="lines"></p>Or{" "}
+              {switchLogin ? (onForgot ? "forgot " : "login ") : "connect "}
               with
               <p className="lines"></p>
             </div>

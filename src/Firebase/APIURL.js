@@ -14,6 +14,8 @@ export const CHANGE_PASSWORD = `https://identitytoolkit.googleapis.com/v1/accoun
 export const UPDATE_USER = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`
 export const PASSWORD_RESET = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${API_KEY}`
 
+
+// RAZORPAY
 export const FETCH_PAYMENT = `https://api.razorpay.com/v1/payments`
 export const AUTH_DETAILS = {
     auth: {

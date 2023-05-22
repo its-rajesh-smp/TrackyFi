@@ -6,6 +6,9 @@
   align-items: center;
   width: 100%;
 }
+.CompleteProfile-div button {
+  cursor: pointer;
+}
 
 .CompleteProfile-div__container {
   display: flex;

@@ -18,6 +18,7 @@
 .CategoryPage-div__addCate {
   display: flex;
   margin: 1.25rem 0px;
+  gap: 5px;
 }
 .CategoryPage-div__addCate input,
 .CategoryPage-div__addCate button {
@@ -28,7 +29,11 @@
   width: 100%;
 }
 .CategoryPage-div__addCate button {
+  cursor: pointer;
   width: 20%;
+  background-color: navajowhite;
+  border: none;
+  border-radius: 5px;
 }
 
 .CategoryPage-div__chartContainer {

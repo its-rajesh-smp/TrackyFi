@@ -10,6 +10,9 @@
   gap: 1.25rem;
   position: relative;
 }
+.UserProfile-div button {
+  cursor: pointer;
+}
 .UserProfile-div .UserProfileImg {
   width: 9.375rem;
 }
@@ -71,6 +74,10 @@
 .UserProfile-div form p {
   font-size: 0.75rem;
   margin-top: 5px;
+}
+
+.clickToAddCode {
+  cursor: pointer;
 }
 
 /* Smartphones  */

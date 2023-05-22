@@ -30,7 +30,6 @@ export const authUsingGoogle = () => {
   return async (dispatch, getState) => {
     try {
       const { _tokenResponse: authData } = await signInWithPopup(auth, provider)
-      console.log(authData);
 
       if (authData.isNewUser) {
         localStorage.setItem("trackfyUser", authData.idToken)

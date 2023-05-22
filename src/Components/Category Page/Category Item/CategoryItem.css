@@ -4,4 +4,7 @@
   color: black;
   justify-content: space-between;
   padding: 0.3125rem 0.625rem;
+}
+.CategoryItem-Li span:last-child {
+  cursor: pointer;
 }/*# sourceMappingURL=CategoryItem.css.map */

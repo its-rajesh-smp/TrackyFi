@@ -43,6 +43,7 @@
     background-color: gray;
     border-top-right-radius: torem(5px);
     border-bottom-left-radius: torem(20px);
+    cursor: pointer;
   }
   .bxs-box {
     position: absolute;
@@ -51,12 +52,17 @@
     margin-bottom: torem(5px);
     bottom: 0;
     font-size: torem(30px);
+    cursor: pointer;
     color: rgb(255, 0, 0);
   }
 
   h3 {
     font-size: torem(20px);
     margin-bottom: torem(30px);
+  }
+  button,
+  select {
+    cursor: pointer;
   }
   input,
   button,

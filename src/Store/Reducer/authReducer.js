@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
-import { fetchExpense } from "./transectionReducer";
+import { clearExpense, fetchExpense } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
 
@@ -182,6 +182,7 @@ export const logoutUserfunc = () => {
     return (dispatch) => {
         localStorage.clear("trackfyUser")
         dispatch(logoutUser())
+        dispatch(clearExpense())
     }
 }
 

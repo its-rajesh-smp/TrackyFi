@@ -5,4 +5,9 @@
   color: black;
   justify-content: space-between;
   padding: torem(5px) torem(10px);
+  span {
+    &:last-child {
+      cursor: pointer;
+    }
+  }
 }

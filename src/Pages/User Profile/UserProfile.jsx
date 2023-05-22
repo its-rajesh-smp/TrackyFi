@@ -169,7 +169,9 @@ function UserProfile(props) {
             >
               Become a primium to download all data
             </a>
-            <p onClick={onCodeAdd}>Click to add code</p>
+            <p className="clickToAddCode" onClick={onCodeAdd}>
+              Click to add code
+            </p>
           </>
         )}
       </form>

@@ -5,6 +5,9 @@
   height: 100vh;
   width: 100%;
 }
+.Login-div button {
+  cursor: pointer;
+}
 
 .Login-div__topDiv {
   padding: 2.5rem;
@@ -99,12 +102,14 @@
 .Login-div__form .Login-div__form_switch p:last-child {
   font-weight: 500;
   color: #1877f2;
+  cursor: pointer;
 }
 
 .forgotPass {
   font-size: 0.75rem;
   margin-top: 0.3125rem;
   color: red;
+  cursor: pointer;
 }
 
 /* Smartphones  */

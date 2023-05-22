@@ -19,6 +19,7 @@
 .CategoryPage-div__addCate {
   display: flex;
   margin: torem(20px) 0px;
+  gap: 5px;
   input,
   button {
     padding: torem(10px);
@@ -28,7 +29,11 @@
     width: 100%;
   }
   button {
+    cursor: pointer;
     width: 20%;
+    background-color: navajowhite;
+    border: none;
+    border-radius: 5px;
   }
 }
 

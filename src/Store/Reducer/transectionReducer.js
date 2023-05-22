@@ -14,14 +14,14 @@ const transectionReducer = createSlice({
         fetchExpense: (state, action) => {
             state.expense = action.payload
         },
-        setBlob: (state, action) => {
-            state.blob = action.payload
+        clearExpense: (state) => {
+            state.expense = []
         }
     }
 })
 
 
-export const { addExpense, fetchExpense, setBlob } = transectionReducer.actions
+export const { addExpense, fetchExpense, clearExpense } = transectionReducer.actions
 export default transectionReducer
 
 

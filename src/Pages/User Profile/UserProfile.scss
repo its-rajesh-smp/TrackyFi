@@ -10,6 +10,9 @@
   margin-right: auto;
   gap: torem(20px);
   position: relative;
+  button {
+    cursor: pointer;
+  }
   .UserProfileImg {
     width: torem(150px);
   }
@@ -73,6 +76,9 @@
       margin-top: 5px;
     }
   }
+}
+.clickToAddCode {
+  cursor: pointer;
 }
 
 //? Media
