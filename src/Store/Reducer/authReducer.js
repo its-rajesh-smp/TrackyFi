@@ -62,34 +62,33 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 setLoader(false)
             }
             else {
-                const { data: authData } = await axios.post(LOGIN_USER, { ...enteredData, returnSecureToken: true })
+                const { data: authData } = await axios.post(LOGIN_USER, { ...enteredData, returnSecureToken: true })    //AuthData=>idToken
                 localStorage.setItem("trackfyUser", authData.idToken)
                 const userEmail = authData.email.replace(".", "").replace("@", "")
-                const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
-                const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken })
+                const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)    //UserData=>transections,category
+                const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken }) //GetUser=>isEmailVerified
+
 
                 // PREPAIRE FOR DISPATCH TRANSECTIONS
-                const userTransections = userData.transections === undefined ? {} : userData.transections
+                const userTransections = !userData.transections ? {} : userData.transections
 
                 const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
                     return { ...userTransections[expenseId], id: expenseId }
                 })
 
                 // PREPARING CATEGORY ARRAY
-                const newCategoryArr = Object.values(userData.category === undefined ? {} : userData.category)
+                const newCategoryArr = Object.values(!userData.category ? {} : userData.category)
 
                 // DISPATCH TRANSECTIONS
                 dispatch(fetchExpense(newExpenseArr))
                 dispatch(fetchCategory(newCategoryArr))
-
-
-
 
                 // Before Dispatch removing the transection field
                 delete userData.transections
                 delete userData.category
                 const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
 
+                // DISPATCH USER
                 dispatch(fetchUser(newUserDataObj))
                 setLoader(false)
             }
@@ -123,16 +122,15 @@ export const fetchUsefunc = (setLoading) => {
             const userEmail = userAuth.email.replace(".", "").replace("@", "")
             const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)
 
-
             // PREPAIRE FOR DISPATCH TRANSECTIONS AND TOTAL
-            const userTransections = userData.transections === undefined ? {} : userData.transections
+            const userTransections = !userData.transections ? {} : userData.transections
 
             const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
                 return { ...userTransections[expenseId], id: expenseId }
             })
 
             // PREPARING CATEGORY ARRAY
-            const newCategoryArr = Object.keys(userData.category === undefined ? {} : userData.category).map((id) => {
+            const newCategoryArr = Object.keys(!userData.category ? {} : userData.category).map((id) => {
                 return { id: id, name: userData.category[id].name }
             })
 
@@ -142,13 +140,13 @@ export const fetchUsefunc = (setLoading) => {
 
 
 
-            // DISPATCH USER
 
             // Before Dispatch removing the transection field
             delete userData.transections
             delete userData.category
             const newUserDataObj = { ...userAuth, ...userData, idToken: localToken }
 
+            // DISPATCH USER
             dispatch(fetchUser(newUserDataObj))
             setLoading(false)
         } catch (error) {
@@ -202,7 +200,6 @@ export const sendEmailVerification = (setLoader) => {
 export const updateProfile = (name, phone, password, setLoader, setToggleEdit) => {
     return async (dispatch, getState) => {
         try {
-
             const currentUserData = getState().authReducer
             const idToken = currentUserData.idToken
             const currentEmail = currentUserData.email.replace(".", "").replace("@", "")

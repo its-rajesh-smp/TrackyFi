@@ -5,13 +5,14 @@ import {
   createUserfunc,
   sendForgotPassword,
 } from "../../Store/Reducer/authReducer";
+import { authUsingGoogle } from "../../Firebase/firebase";
 
 function Login(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
   const dispatch = useDispatch();
   const [switchLogin, setSwitchLogin] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
   const [onForgot, setOnForgot] = useState(false);
 
@@ -60,6 +61,10 @@ function Login(props) {
     }
   };
 
+  const googleAuthHandeler = () => {
+    dispatch(authUsingGoogle());
+  };
+
   return (
     <div className={` Login-div ${theme}`}>
       <div className="Login-div__topDiv">
@@ -76,7 +81,7 @@ function Login(props) {
               : "Create Account"}
           </h1>
           <div className="GoogleBtnContainer">
-            <button>
+            <button onClick={googleAuthHandeler}>
               <i className="bx bxl-google"></i>Google
             </button>
             <div className="lineContainer">

@@ -1,13 +1,16 @@
 import React from "react";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserfunc } from "../../Store/Reducer/authReducer";
 
 function Header(props) {
   const dispatch = useDispatch();
+  const naviget = useNavigate();
+
   const onLogOutBtnClick = () => {
     dispatch(logoutUserfunc());
+    naviget("/");
   };
 
   return (
