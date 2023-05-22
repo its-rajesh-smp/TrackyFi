@@ -142,7 +142,7 @@ function AddEditCard(props) {
           <option value="not selected">Not Selected</option>
           {categoryList.map((category) => {
             return (
-              <option key={category.id} value={category.name.toLowerCase()}>
+              <option key={Math.random()} value={category.name.toLowerCase()}>
                 {category.name}
               </option>
             );
