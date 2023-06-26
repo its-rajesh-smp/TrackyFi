@@ -60,9 +60,9 @@ function UserProfile(props) {
   /* -------------------------------------------------------------------------- */
   /*                              ON CODE ADD CLICK                             */
   /* -------------------------------------------------------------------------- */
-  const onCodeAdd = (e) => {
+  const onClickUnlockVip = (e) => {
     e.preventDefault();
-    const enteredCode = prompt("Enter Your Rozorpay Code:-");
+    const enteredCode = prompt("Enter VIP CODE:- (PUT ANY RANDOM)");
     if (enteredCode.trim() === "") {
       return;
     }
@@ -162,17 +162,7 @@ function UserProfile(props) {
         )}
 
         {!selector.VIP && (
-          <>
-            <a
-              href="https://pages.razorpay.com/pl_LqZNxW1c4Uvlx6/view"
-              target="_blank"
-            >
-              Become a primium to download all data
-            </a>
-            <p className="clickToAddCode" onClick={onCodeAdd}>
-              Click to add code
-            </p>
-          </>
+          <p style={{ cursor: "pointer" }} onClick={onClickUnlockVip}>Unlock VIP</p>
         )}
       </form>
     </div>
