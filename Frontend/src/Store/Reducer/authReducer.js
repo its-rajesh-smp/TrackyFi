@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
+import { CREATEUSER, GETUSER } from "../../API/endpoint"
 import { clearExpense, fetchExpense } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
@@ -52,56 +53,70 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
     return async (dispatch, getState) => {
         try {
             if (!switchLogin) {
-                const { data: authData } = await axios.post(CREATE_USER, { ...enteredData, returnSecureToken: true })
-                localStorage.setItem("trackfyUser", authData.idToken)
-                const userEmail = authData.email.replace(".", "").replace("@", "")
-                const { data: userData } = await axios.patch(`${USERS}/${userEmail}.json`, {
-                    isVerified: false,
-                    email: authData.email
-                })
-                dispatch(authUser(authData))
+                const { data: authData } = await axios.post(CREATEUSER, enteredData)
+
+                console.log(authData);
+
+                if (authData.error) {
+                    throw new Error(authData.error)
+                }
+
+                // localStorage.setItem("trackfyUser", authData.idToken)
+                // const userEmail = authData.email.replace(".", "").replace("@", "")
+                // const { data: userData } = await axios.patch(`${USERS}/${userEmail}.json`, {
+                //     isVerified: false,
+                //     email: authData.email
+                // })
+                // dispatch(authUser(authData))
                 setLoader(false)
             }
             else {
-                const { data: authData } = await axios.post(LOGIN_USER, { ...enteredData, returnSecureToken: true })    //AuthData=>idToken
-                localStorage.setItem("trackfyUser", authData.idToken)
-                const userEmail = authData.email.replace(".", "").replace("@", "")
-                const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)    //UserData=>transections,category
-                const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken }) //GetUser=>isEmailVerified
+                const { data: authData } = await axios.post(GETUSER, enteredData)    //AuthData=>idToken
+
+                console.log(authData);
+
+                if (authData.error) {
+                    throw new Error(authData.error)
+                }
 
 
-                // PREPAIRE FOR DISPATCH TRANSECTIONS
-                const userTransections = !userData.transections ? {} : userData.transections
+                // localStorage.setItem("trackfyUser", authData.idToken)
+                // const userEmail = authData.email.replace(".", "").replace("@", "")
+                // const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)    //UserData=>transections,category
+                // const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken }) //GetUser=>isEmailVerified
 
-                const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
-                    return { ...userTransections[expenseId], id: expenseId }
-                })
 
-                // PREPARING CATEGORY ARRAY
-                const newCategoryArr = Object.values(!userData.category ? {} : userData.category)
+                // // PREPAIRE FOR DISPATCH TRANSECTIONS
+                // const userTransections = !userData.transections ? {} : userData.transections
 
-                // DISPATCH TRANSECTIONS
-                dispatch(fetchExpense(newExpenseArr))
-                dispatch(fetchCategory(newCategoryArr))
+                // const newExpenseArr = Object.keys(userTransections).map((expenseId) => {
+                //     return { ...userTransections[expenseId], id: expenseId }
+                // })
 
-                // Before Dispatch removing the transection field
-                delete userData.transections
-                delete userData.category
-                const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
+                // // PREPARING CATEGORY ARRAY
+                // const newCategoryArr = Object.values(!userData.category ? {} : userData.category)
 
-                // DISPATCH USER
-                dispatch(fetchUser(newUserDataObj))
+                // // DISPATCH TRANSECTIONS
+                // dispatch(fetchExpense(newExpenseArr))
+                // dispatch(fetchCategory(newCategoryArr))
+
+                // // Before Dispatch removing the transection field
+                // delete userData.transections
+                // delete userData.category
+                // const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
+
+                // // DISPATCH USER
+                // dispatch(fetchUser(newUserDataObj))
                 setLoader(false)
             }
 
         } catch (error) {
-            let message = error.response.data.error.message
+            let message = error.message
             dispatch(setVisiblefunc("error", message))
-            console.log(error);
             setLoader(false)
-            if (message === "EMAIL_EXISTS" || message === "EMAIL_NOT_FOUND") {
-                onSwitchLoginHandeler()
-            }
+            // if (message === "EMAIL_EXISTS" || message === "EMAIL_NOT_FOUND") {
+            //     onSwitchLoginHandeler()
+            // }
         }
     }
 }
