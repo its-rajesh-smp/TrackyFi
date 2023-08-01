@@ -8,7 +8,8 @@ const user = require("./routes/user")
 const category = require("./routes/category")
 const app = express()
 
-
+// Relation
+const relations = require("./relations/relations")()
 
 // Middlewires
 app.use(body_parser.urlencoded({ extended: false }))

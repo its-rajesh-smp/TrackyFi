@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const Category = require("../models/category")
+
 const bcrypt = require("bcrypt");
 const jwt = require("../utils/jwt");
 const saltRound = 10;
@@ -44,7 +46,7 @@ exports.signin = async (req, res) => {
         const { email, password } = req.body;
 
         // Finding User
-        const dbRes = await User.findOne({ where: { email: email } });
+        const dbRes = await User.findOne({ where: { email: email }, include: [Category] });
 
         // If User Not Present
         if (dbRes === null) {
@@ -69,6 +71,7 @@ exports.signin = async (req, res) => {
             email,
             verified: dbRes.dataValues.verified,
             idToken: idToken,
+            categoryList: dbRes.categories
         };
 
         res.send({ error: false, body: payload });
@@ -91,7 +94,8 @@ exports.getUser = async (req, res) => {
         const { email, password } = jwt.verify(idToken);
 
         // Finding User
-        const dbRes = await User.findOne({ where: { email: email } });
+        const dbRes = await User.findOne({ where: { email: email }, include: [Category] });
+
 
         // If User Not Found
         if (dbRes === null) {
@@ -113,6 +117,7 @@ exports.getUser = async (req, res) => {
             email: dbRes.dataValues.email,
             verified: dbRes.dataValues.verified,
             idToken,
+            categoryList: dbRes.categories
         };
 
         res.send({ error: false, body: payload });
@@ -127,14 +132,14 @@ exports.getUser = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const { email, updateFields } = req.body
-        console.log(email, updateFields);
+
+        // Update reqested Fields In Database 
         const dbRes = await User.update(updateFields, {
             where: { email: email }
         })
 
-        console.log(dbRes);
-
-        res.send({ error: "User Not Found", body: null });
+        // Sending The Updated Fields To Frontend
+        res.send({ error: false, body: updateFields });
 
     } catch (error) {
         console.log(error.message);

@@ -14,10 +14,6 @@ const Category = sequelize.define("category", {
         allowNull: false,
         type: Sequelize.STRING
     },
-    email: {
-        allowNull: false,
-        type: Sequelize.STRING
-    }
 })
 
 module.exports = Category
