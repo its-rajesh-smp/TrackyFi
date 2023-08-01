@@ -5,6 +5,7 @@ const sequelize = require("./utils/database")
 
 // Routes
 const user = require("./routes/user")
+const category = require("./routes/category")
 const app = express()
 
 
@@ -15,6 +16,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use(user)
+app.use(category)
 
 
 
