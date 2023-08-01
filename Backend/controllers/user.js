@@ -1,8 +1,9 @@
 const User = require("../models/user")
 const bcrypt = require("bcrypt")
+const jwt = require("../utils/jwt")
 const saltRound = 10
 
-exports.create = async (req, res) => {
+exports.signup = async (req, res) => {
     try {
         const { email, password } = req.body
 
@@ -10,7 +11,11 @@ exports.create = async (req, res) => {
 
         const dbRes = await User.create({ email, password: hash })
 
-        res.send({ error: false, body: dbRes.dataValues })
+        const idToken = jwt.encrept({ email, password })
+
+        const payload = { email, verified: dbRes.dataValues.verified, idToken: idToken }
+        res.send({ error: false, body: payload })
+
     } catch (error) {
         console.log(error);
         res.send({ error: error.original.sqlMessage, body: null })
@@ -19,7 +24,7 @@ exports.create = async (req, res) => {
 
 
 
-exports.get = async (req, res) => {
+exports.signin = async (req, res) => {
     try {
         const { email, password } = req.body
         const dbRes = await User.findOne({ where: { email: email } })
@@ -35,8 +40,10 @@ exports.get = async (req, res) => {
             return;
         }
 
+        const idToken = jwt.encrept({ email, password })
+        const payload = { email, verified: dbRes.dataValues.verified, idToken: idToken }
 
-        res.send({ error: false, body: dbRes.dataValues })
+        res.send({ error: false, body: payload })
     } catch (error) {
         console.log(error);
         res.send({ error: error.original.sqlMessage, body: null })

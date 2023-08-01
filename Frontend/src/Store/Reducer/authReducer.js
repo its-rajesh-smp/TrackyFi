@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AUTH_DETAILS, CREATE_USER, FETCH_PAYMENT, GET_USER, LOGIN_USER, PASSWORD_RESET, SEND_VERIFY_LINK, UPDATE_USER, USERS } from "../../Firebase/APIURL";
-import { CREATEUSER, GETUSER } from "../../API/endpoint"
+import { SIGN_IN, SIGN_UP } from "../../API/endpoint"
 import { clearExpense, fetchExpense } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
@@ -53,7 +53,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
     return async (dispatch, getState) => {
         try {
             if (!switchLogin) {
-                const { data: authData } = await axios.post(CREATEUSER, enteredData)
+                const { data: authData } = await axios.post(SIGN_UP, enteredData)
 
                 console.log(authData);
 
@@ -61,17 +61,14 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                     throw new Error(authData.error)
                 }
 
-                // localStorage.setItem("trackfyUser", authData.idToken)
-                // const userEmail = authData.email.replace(".", "").replace("@", "")
-                // const { data: userData } = await axios.patch(`${USERS}/${userEmail}.json`, {
-                //     isVerified: false,
-                //     email: authData.email
-                // })
-                // dispatch(authUser(authData))
+                localStorage.setItem("trackfyUser", authData.idToken)
+
+
+                dispatch(authUser(authData))
                 setLoader(false)
             }
             else {
-                const { data: authData } = await axios.post(GETUSER, enteredData)    //AuthData=>idToken
+                const { data: authData } = await axios.post(SIGN_IN, enteredData)    //AuthData=>idToken
 
                 console.log(authData);
 
@@ -80,10 +77,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 }
 
 
-                // localStorage.setItem("trackfyUser", authData.idToken)
-                // const userEmail = authData.email.replace(".", "").replace("@", "")
-                // const { data: userData } = await axios.get(`${USERS}/${userEmail}.json`)    //UserData=>transections,category
-                // const { data: getUser } = await axios.post(GET_USER, { idToken: authData.idToken }) //GetUser=>isEmailVerified
+                localStorage.setItem("trackfyUser", authData.idToken)
 
 
                 // // PREPAIRE FOR DISPATCH TRANSECTIONS
@@ -106,7 +100,7 @@ export const createUserfunc = (enteredData, switchLogin, onSwitchLoginHandeler, 
                 // const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
 
                 // // DISPATCH USER
-                // dispatch(fetchUser(newUserDataObj))
+                dispatch(fetchUser(authData))
                 setLoader(false)
             }
 
