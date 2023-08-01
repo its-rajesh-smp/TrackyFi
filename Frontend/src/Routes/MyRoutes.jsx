@@ -10,8 +10,8 @@ import Login from "../Pages/Login/Login";
 import CompleteProfile from "../Pages/Complete Profile/CompleteProfile";
 
 function MyRoutes(props) {
-  const isVerified = useSelector((state) => state.authReducer.isVerified);
-  const isAuth = useSelector((state) => state.authReducer.isAuth);
+  const isVerified = useSelector((state) => state.authReducer.verified);
+  const isAuth = useSelector((state) => state.authReducer.auth);
 
   return (
     <Routes>

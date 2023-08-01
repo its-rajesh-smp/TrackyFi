@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"
-import { authUser, fetchUser } from "../Store/Reducer/authReducer";
+import { authUser } from "../Store/Reducer/authReducer";
 import { USERS, GET_USER } from "./APIURL";
 import axios from "axios";
 import { fetchExpense } from "../Store/Reducer/transectionReducer";
@@ -66,7 +66,7 @@ export const authUsingGoogle = () => {
         delete userData.category
         const newUserDataObj = { ...authData, ...userData, ...getUser.users[0] }
 
-        dispatch(fetchUser(newUserDataObj))
+        dispatch(authUser(newUserDataObj))
 
 
       }

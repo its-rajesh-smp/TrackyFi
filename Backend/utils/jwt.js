@@ -8,5 +8,12 @@ exports.encrept = (data) => {
 
 
 exports.decrept = (token) => {
-    return jwt.verify(token, credentials.password)
+    return jwt.decode(token)
+}
+
+
+
+
+exports.verify = (data) => {
+    return jwt.verify(data, credentials.password)
 }
