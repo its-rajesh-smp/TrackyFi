@@ -3,7 +3,7 @@ import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
 import generate_txt from "../../Functions/generate_txt";
 import { setVisiblefunc } from "./notificationReducer";
-import { ADD_TRANSECTION } from "../../API/endpoint";
+import { ADD_TRANSECTION, EDIT_TRANSECTION } from "../../API/endpoint";
 
 const transectionReducer = createSlice({
     name: "transections",
@@ -83,19 +83,20 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
 export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
-            const prevData = getState().transectionReducer.expense
-            const { data } = await axios.put(`${USERS}/${userEmail}/transections/${expenseId}.json`, expenseData)
-            const updatedDataArray = prevData.map((val) => {
-                if (val.id === expenseId) {
-                    return { ...data, id: expenseId }
-                }
-                else {
-                    return val
-                }
-            })
-            dispatch(fetchExpense(updatedDataArray))
-            onCloseBtnHandeler()
+            const prevData = getState().transectionReducer.transections
+            // const { data } = await axios.patch(EDIT_TRANSECTION, { id: expenseId, ...expenseData })
+            console.log(expenseData);
+
+            // const updatedDataArray = prevData.map((val) => {
+            //     if (val.id === expenseId) {
+            //         return { ...data, id: expenseId }
+            //     }
+            //     else {
+            //         return val
+            //     }
+            // })
+            // dispatch(fetchExpense(updatedDataArray))
+            // onCloseBtnHandeler()
 
         } catch (error) {
             let message = error.message;
