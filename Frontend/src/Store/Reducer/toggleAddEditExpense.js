@@ -12,7 +12,6 @@ const toggleAddEditExpense = createSlice({
             state.isAdd = true
         },
         toggleEdit: (state, action) => {
-            console.log(action.payload);
             state.isEdit = true
             state.data = action.payload
         },

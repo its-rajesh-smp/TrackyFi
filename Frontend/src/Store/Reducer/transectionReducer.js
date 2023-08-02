@@ -3,7 +3,7 @@ import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
 import generate_txt from "../../Functions/generate_txt";
 import { setVisiblefunc } from "./notificationReducer";
-import { ADD_TRANSECTION, EDIT_TRANSECTION } from "../../API/endpoint";
+import { ADD_TRANSECTION, EDIT_TRANSECTION, DELETE_TRANSECTION } from "../../API/endpoint";
 
 const transectionReducer = createSlice({
     name: "transections",
@@ -69,19 +69,26 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
 
 
 //! Delete Expense
-export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
+export const deleteExpense = (transectionId, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
-            const { data } = await axios.delete(`${USERS}/${userEmail}/transections/${expenseId}.json`)
-            const prevData = getState().transectionReducer.expense
-            const updatedDataArray = prevData.filter((expesnes) => {
-                if (expesnes.id !== expenseId) {
+
+            const { data } = await axios.post(DELETE_TRANSECTION, { transectionId })
+
+
+            // In Case Of Error
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            const prevData = getState().transectionReducer.transections
+            const newTransArray = prevData.filter((transection) => {
+                if (transection.id !== transectionId) {
                     return true
                 }
-
             })
-            dispatch(setTransections(updatedDataArray))
+
+            dispatch(setTransections(newTransArray))
             onCloseBtnHandeler()
         } catch (error) {
             let message = error.message;

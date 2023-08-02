@@ -52,6 +52,10 @@ exports.edit = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
+        const { transectionId } = req.body
+        const dbRes = await Transections.destroy({ where: { id: transectionId } })
+        res.send({ error: false, body: true });
+
 
     } catch (error) {
         console.log(error.message);
