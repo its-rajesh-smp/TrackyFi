@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTotal } from "../../../Store/Reducer/totalReducer";
 
@@ -53,11 +53,14 @@ function AllTransectionContainer(props) {
     }
   });
 
+
+
   // We Cannot Update like this as we are rendering a another component
-  // So i use this kind of <jugad>
-  setTimeout(function () {
+  useEffect(() => {
     dispatch(setTotal(totalTransection));
-  }, 1);
+  }, [expenseArr])
+  // So i use this kind of <jugad>
+
 
   // Map To Array
   const newTransectionCover = [];

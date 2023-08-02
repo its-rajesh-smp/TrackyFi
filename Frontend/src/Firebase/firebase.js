@@ -3,7 +3,7 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"
 import { authUser } from "../Store/Reducer/authReducer";
 import { USERS, GET_USER } from "./APIURL";
 import axios from "axios";
-import { fetchExpense } from "../Store/Reducer/transectionReducer";
+import { setTransections } from "../Store/Reducer/transectionReducer";
 import { fetchCategory } from "../Store/Reducer/categoryReducer";
 
 const firebaseConfig = {
@@ -58,7 +58,7 @@ export const authUsingGoogle = () => {
         const newCategoryArr = Object.values(!userData.category ? {} : userData.category)
 
         // DISPATCH TRANSECTIONS
-        dispatch(fetchExpense(newExpenseArr))
+        dispatch(setTransections(newExpenseArr))
         dispatch(fetchCategory(newCategoryArr))
 
         // Before Dispatch removing the transection field

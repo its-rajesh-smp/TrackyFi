@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { toggleEdit } from "../../../../Store/Reducer/toggleAddEditExpense";
 
 function Transection(props) {
+
+
   /* -------------------------------------------------------------------------- */
   /*                                  ON CLICK                                  */
   /* -------------------------------------------------------------------------- */

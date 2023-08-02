@@ -34,7 +34,14 @@ exports.add = async (req, res) => {
 
 exports.edit = async (req, res) => {
     try {
-        console.log(req.body);
+        const { transectionId, categoryId, date, time, price, type, name } = req.body
+
+        const dbRes = await Transections.update({ categoryId, date, time, price, type, name }, {
+            where: { id: transectionId }
+        })
+
+        res.send({ error: "", body: true });
+
     } catch (error) {
         console.log(error.message);
         res.send({ error: error.message, body: null });

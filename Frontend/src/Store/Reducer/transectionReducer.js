@@ -12,7 +12,7 @@ const transectionReducer = createSlice({
         addExpense: (state, action) => {
             state.transections = [...state.transections, action.payload]
         },
-        fetchExpense: (state, action) => {
+        setTransections: (state, action) => {
             state.transections = action.payload
         },
         clearExpense: (state) => {
@@ -22,7 +22,7 @@ const transectionReducer = createSlice({
 })
 
 
-export const { addExpense, fetchExpense, clearExpense } = transectionReducer.actions
+export const { addExpense, setTransections, clearExpense } = transectionReducer.actions
 export default transectionReducer
 
 
@@ -35,7 +35,20 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const email = getState().authReducer.email
-            const { data } = await axios.post(ADD_TRANSECTION, { email, ...expenseData })
+
+
+            const payload = {
+                categoryId: expenseData.category.id,
+                categoryName: expenseData.category.name,
+                date: expenseData.date,
+                time: expenseData.time,
+                price: expenseData.price,
+                type: expenseData.type,
+                name: expenseData.name,
+                email
+            }
+
+            const { data } = await axios.post(ADD_TRANSECTION, payload)
 
             // In Case Of Error
             if (data.error) {
@@ -43,7 +56,7 @@ export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
             }
 
             dispatch(addExpense(data.body))
-            onCloseBtnHandeler()
+            // onCloseBtnHandeler()
 
         } catch (error) {
             let message = error.message;
@@ -68,7 +81,7 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
                 }
 
             })
-            dispatch(fetchExpense(updatedDataArray))
+            dispatch(setTransections(updatedDataArray))
             onCloseBtnHandeler()
         } catch (error) {
             let message = error.message;
@@ -80,23 +93,37 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
 
 
 // !Edit expense
-export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setLoader) => {
+export const editExpensefunc = (transectionId, expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
             const prevData = getState().transectionReducer.transections
-            // const { data } = await axios.patch(EDIT_TRANSECTION, { id: expenseId, ...expenseData })
-            console.log(expenseData);
 
-            // const updatedDataArray = prevData.map((val) => {
-            //     if (val.id === expenseId) {
-            //         return { ...data, id: expenseId }
-            //     }
-            //     else {
-            //         return val
-            //     }
-            // })
-            // dispatch(fetchExpense(updatedDataArray))
-            // onCloseBtnHandeler()
+            const payload = {
+                transectionId,
+                categoryId: expenseData.category.id,
+                categoryName: expenseData.category.name,
+                date: expenseData.date,
+                time: expenseData.time,
+                price: expenseData.price,
+                type: expenseData.type,
+                name: expenseData.name,
+            }
+
+
+            await axios.patch(EDIT_TRANSECTION, payload)
+
+
+            const newTransArray = prevData.map((val) => {
+                if (val.id === transectionId) {
+                    return { ...expenseData, id: transectionId }
+                }
+                else {
+                    return val
+                }
+            })
+
+            dispatch(setTransections(newTransArray))
+
 
         } catch (error) {
             let message = error.message;

@@ -10,7 +10,7 @@ import {
     USERS,
 } from "../../Firebase/APIURL";
 import { SIGN_IN, SIGN_UP, GET_USER, UPDATE_USER } from "../../API/endpoint";
-import { clearExpense, fetchExpense } from "./transectionReducer";
+import { clearExpense, setTransections } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
 
@@ -113,7 +113,7 @@ export const fetchUsefunc = (setLoading) => {
 
             // DISPATCHING
             dispatch(fetchCategory(data.body.categories));
-            dispatch(fetchExpense(data.body.transections))
+            dispatch(setTransections(data.body.transections))
             dispatch(authUser(data.body));
 
         } catch (error) {

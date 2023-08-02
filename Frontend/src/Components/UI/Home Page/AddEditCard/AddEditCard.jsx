@@ -19,10 +19,9 @@ function AddEditCard(props) {
   const [date, setDate] = useState(selector.data.date);
   const [time, setTime] = useState(selector.data.time);
   const [price, setPrice] = useState(selector.data.price);
-  const [category, setCategory] = useState(
-    selector.data.category === "" ? "Not Selected" : selector.data.category
-  );
+  const [category, setCategory] = useState(selector.data.category ? selector.data.category : { id: 0, name: "No Category" });
   const [loader, setLoader] = useState(false);
+
   /* -------------------------------------------------------------------------- */
   /*                                ON CLOSE BTN                                */
   /* -------------------------------------------------------------------------- */
@@ -48,11 +47,11 @@ function AddEditCard(props) {
     if (!loader) {
       setLoader(true);
       const newExpenseObject = {
-        name: name,
-        date: date,
-        time: time,
-        price: price,
-        categoryId: category,
+        name,
+        date,
+        time,
+        price,
+        category,
         type: transectionType,
       };
 
@@ -133,16 +132,17 @@ function AddEditCard(props) {
 
         <select
           onChange={(e) => {
-            setCategory(e.target.value);
+            setCategory(JSON.parse(e.target.value));
           }}
-          value={category}
+          value={JSON.stringify(category)}
           name="cataselect"
           id="cataselect"
         >
-          <option value="not selected">Not Selected</option>
+          <option value={JSON.stringify({ id: 0, name: "No Category" })}>No Category</option>
+
           {categoryList.map((category) => {
             return (
-              <option key={Math.random()} value={category.id}>
+              <option key={Math.random()} value={JSON.stringify({ name: category.name, id: category.id, })}>
                 {category.name}
               </option>
             );

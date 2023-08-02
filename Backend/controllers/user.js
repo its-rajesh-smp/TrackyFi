@@ -106,7 +106,7 @@ exports.getUser = async (req, res) => {
                 include: [{
                     model: Category,
                     as: "category",
-                    attributes: ["name"]
+                    attributes: ["name", "id"]
                 }],
                 attributes: { exclude: ['categoryId'] }
             }]
