@@ -9,7 +9,7 @@ function AllTransectionContainer(props) {
   const dispatch = useDispatch();
   const searchValue = useSelector((state) => state.searchReducer.searchValue);
   const filterValue = useSelector((state) => state.searchReducer.filterValue);
-  const selector = useSelector((state) => state.transectionReducer.expense);
+  const selector = useSelector((state) => state.transectionReducer.transections);
   const totalTransection = { totalExpense: 0, totalCredit: 0 };
 
   // Sorting selector is the readonly value
@@ -30,7 +30,7 @@ function AllTransectionContainer(props) {
         .trim()
         .includes(searchValue.toLowerCase().trim()) ||
         expense.price.trim().includes(searchValue.trim()) ||
-        expense.category
+        expense.category.name
           .toLowerCase()
           .trim()
           .includes(searchValue.toLowerCase().trim()) ||

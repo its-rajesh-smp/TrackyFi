@@ -52,7 +52,7 @@ function AddEditCard(props) {
         date: date,
         time: time,
         price: price,
-        category: category,
+        categoryId: category,
         type: transectionType,
       };
 
@@ -142,7 +142,7 @@ function AddEditCard(props) {
           <option value="not selected">Not Selected</option>
           {categoryList.map((category) => {
             return (
-              <option key={Math.random()} value={category.name.toLowerCase()}>
+              <option key={Math.random()} value={category.id}>
                 {category.name}
               </option>
             );

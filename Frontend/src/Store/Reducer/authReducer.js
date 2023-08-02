@@ -105,15 +105,17 @@ export const fetchUsefunc = (setLoading) => {
 
             // Checking & Getting data From Database
             const { data } = await axios.post(GET_USER, { idToken: localToken });
-
+            console.log(data);
             // In Case Of Error
             if (data.error) {
                 throw new Error(data.error);
             }
 
             // DISPATCHING
-            dispatch(fetchCategory(data.body.categoryList));
+            dispatch(fetchCategory(data.body.categories));
+            dispatch(fetchExpense(data.body.transections))
             dispatch(authUser(data.body));
+
         } catch (error) {
             let message = error.message;
             dispatch(setVisiblefunc("error", message));

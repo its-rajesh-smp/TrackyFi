@@ -3,19 +3,20 @@ import axios from "axios";
 import { USERS } from "../../Firebase/APIURL";
 import generate_txt from "../../Functions/generate_txt";
 import { setVisiblefunc } from "./notificationReducer";
+import { ADD_TRANSECTION } from "../../API/endpoint";
 
 const transectionReducer = createSlice({
     name: "transections",
-    initialState: { expense: [] },
+    initialState: { transections: [] },
     reducers: {
         addExpense: (state, action) => {
-            state.expense = [...state.expense, action.payload]
+            state.transections = [...state.transections, action.payload]
         },
         fetchExpense: (state, action) => {
-            state.expense = action.payload
+            state.transections = action.payload
         },
         clearExpense: (state) => {
-            state.expense = []
+            state.transections = []
         }
     }
 })
@@ -33,28 +34,26 @@ export default transectionReducer
 export const addExpensefunc = (expenseData, onCloseBtnHandeler, setLoader) => {
     return async (dispatch, getState) => {
         try {
-            const userEmail = getState().authReducer.email.replace(".", "").replace("@", "")
-            const { data } = await axios.post(`${USERS}/${userEmail}/transections.json`, expenseData)
-            const responseId = data.name
-            const newObj = { ...expenseData, id: responseId }
-            dispatch(addExpense(newObj))
+            const email = getState().authReducer.email
+            const { data } = await axios.post(ADD_TRANSECTION, { email, ...expenseData })
 
-            setLoader(false)
+            // In Case Of Error
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            dispatch(addExpense(data.body))
             onCloseBtnHandeler()
 
         } catch (error) {
-            setLoader(false)
-            let message = error.response.data.error.message
-            dispatch(setVisiblefunc("error", message))
-            console.log(error);
+            let message = error.message;
+            dispatch(setVisiblefunc("error", message));
         }
+        setLoader(false)
 
     }
 }
 
-//! Fetch Expense
-// Fetching expensess in also done from auth just because we will get all the data related to the user in 
-// a single api call
 
 //! Delete Expense
 export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
@@ -70,14 +69,12 @@ export const deleteExpense = (expenseId, onCloseBtnHandeler, setLoader) => {
 
             })
             dispatch(fetchExpense(updatedDataArray))
-            setLoader(false)
             onCloseBtnHandeler()
         } catch (error) {
-            setLoader(false)
-            console.log(error);
-            let message = error.response.data.error.message
-            dispatch(setVisiblefunc("error", message))
+            let message = error.message;
+            dispatch(setVisiblefunc("error", message));
         }
+        setLoader(false)
     }
 }
 
@@ -98,15 +95,13 @@ export const editExpensefunc = (expenseId, expenseData, onCloseBtnHandeler, setL
                 }
             })
             dispatch(fetchExpense(updatedDataArray))
-            setLoader(false)
             onCloseBtnHandeler()
 
         } catch (error) {
-            setLoader(false)
-            console.log(error);
-            let message = error.response.data.error.message
-            dispatch(setVisiblefunc("error", message))
+            let message = error.message;
+            dispatch(setVisiblefunc("error", message));
         }
+        setLoader(false)
     }
 }
 

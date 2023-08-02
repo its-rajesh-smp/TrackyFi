@@ -3,7 +3,7 @@ const sequelize = require("../utils/database")
 
 
 
-const Category = sequelize.define("category", {
+const Category = sequelize.define("category_table", {
     id: {
         allowNull: false,
         autoIncrement: true,

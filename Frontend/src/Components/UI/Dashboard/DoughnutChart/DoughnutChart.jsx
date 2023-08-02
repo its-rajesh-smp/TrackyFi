@@ -3,7 +3,7 @@ import "./DoughnutChart.css";
 import { CChart } from "@coreui/react-chartjs";
 import { useSelector } from "react-redux";
 function DoughnutChart(props) {
-  const expenses = useSelector((state) => state.transectionReducer.expense);
+  const expenses = useSelector((state) => state.transectionReducer.transections);
 
   // Creating Map
   const categoryMap = new Map();
