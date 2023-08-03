@@ -19,6 +19,10 @@ const User = sequelize.define("user", {
     verified: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
+    },
+    VIP: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 })
 

@@ -70,6 +70,7 @@ exports.signin = async (req, res) => {
         // Forming Payload
         const payload = {
             email,
+            VIP: dbRes.dataValues.VIP,
             verified: dbRes.dataValues.verified,
             idToken: idToken,
             categoryList: dbRes.category_tables,
@@ -131,6 +132,7 @@ exports.getUser = async (req, res) => {
 
         // Forming Payload
         const payload = {
+            VIP: dbRes.dataValues.VIP,
             email: dbRes.dataValues.email,
             verified: dbRes.dataValues.verified,
             idToken,

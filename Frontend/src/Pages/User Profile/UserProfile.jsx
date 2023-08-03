@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./UserProfile.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchPayment,
+  buyVip,
   sendEmailVerification,
   updateProfile,
 } from "../../Store/Reducer/authReducer";
@@ -58,15 +58,12 @@ function UserProfile(props) {
   };
 
   /* -------------------------------------------------------------------------- */
-  /*                              ON CODE ADD CLICK                             */
+  /*                         ON PURCHACE VIP BTN  CLICK                         */
   /* -------------------------------------------------------------------------- */
+
   const onClickUnlockVip = (e) => {
     e.preventDefault();
-    const enteredCode = prompt("Enter VIP CODE:- (PUT ANY RANDOM)");
-    if (enteredCode.trim() === "") {
-      return;
-    }
-    dispatch(fetchPayment(enteredCode));
+    dispatch(buyVip());
   };
 
   /* -------------------------------------------------------------------------- */

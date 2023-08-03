@@ -14,3 +14,9 @@ export const DELETE_CATEGORY = `${host}/category/delete`
 export const ADD_TRANSECTION = `${host}/transections/add`
 export const EDIT_TRANSECTION = `${host}/transections/edit`
 export const DELETE_TRANSECTION = `${host}/transections/delete`
+
+
+
+export const BUY_VIP = `${host}/payment/create`
+export const PAYMENT_CAPTURE = `${host}/payment/capture`
+export const PAYMENT_FAILED = `${host}/payment/failed`

@@ -9,7 +9,7 @@ import {
     SEND_VERIFY_LINK,
     USERS,
 } from "../../Firebase/APIURL";
-import { SIGN_IN, SIGN_UP, GET_USER, UPDATE_USER } from "../../API/endpoint";
+import { SIGN_IN, SIGN_UP, GET_USER, UPDATE_USER, BUY_VIP, PAYMENT_CAPTURE, PAYMENT_FAILED } from "../../API/endpoint";
 import { clearExpense, setTransections } from "./transectionReducer";
 import { fetchCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
@@ -18,6 +18,7 @@ const authReducer = createSlice({
     name: "user/auth",
     initialState: {
         auth: false,
+        VIP: false
     },
     reducers: {
         authUser: (state, action) => {
@@ -241,28 +242,53 @@ export const sendForgotPassword = (email, setLoading, setOnForgot) => {
     };
 };
 
+
+
+
+
 //! FETCH PAYMENT
-export const fetchPayment = (paymentCode) => {
+export const buyVip = () => {
     return async (dispatch, getState) => {
         try {
-            // const { data } = await axios.get('https://api.razorpay.com/v1/payments/pay_LrRQr67nDCIYjr', {
-            //     auth: {
-            //         "username": "rzp_test_mPoNwadW6BCpBy",
-            //         "password": "sgs9uUwqA81IEvL6yjEQn7qa"
-            //     }
-            // })
-            // console.log(data);
-            const userEmail = getState()
-                .authReducer.email.replace(".", "")
-                .replace("@", "");
-            const { data } = await axios.patch(`${USERS}/${userEmail}.json`, {
-                VIP: true,
-            });
-            dispatch(updateUser(data));
+            // Getting idToken from localstorage
+            const localToken = localStorage.getItem("trackfyUser");
+
+            // If token not present
+            if (!localToken) {
+                setLoading(false);
+                return;
+            }
+
+
+            const { data } = await axios.post(BUY_VIP, { idToken: localToken })
+
+            const option = {
+                key: data.body.key_id,
+                order_id: data.body.orderId,
+                handler: async (response) => {
+                    try {
+                        const payload = { orderId: data.body.orderId, paymentId: response.razorpay_payment_id, idToken: localToken }
+                        axios.post(PAYMENT_CAPTURE, payload)
+                        dispatch(updateUser({ VIP: true }))
+
+                    } catch (error) {
+                        await axios.patch(PAYMENT_FAILED, { orderId: data.body.orderId })
+                        let message = error.message;
+                        dispatch(setVisiblefunc("error", message));
+                    }
+                }
+            }
+
+            const rzp = new Razorpay(option)
+            rzp.open()
+
+
+
+
+
         } catch (error) {
-            let message = error.response.data.error.message;
+            let message = error.message;
             dispatch(setVisiblefunc("error", message));
-            console.log(error);
         }
     };
 };

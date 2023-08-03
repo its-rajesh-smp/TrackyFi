@@ -7,6 +7,7 @@ const sequelize = require("./utils/database")
 const user = require("./routes/user")
 const category = require("./routes/category")
 const transection = require("./routes/transection")
+const payment = require("./routes/payment")
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(express.json())
 app.use(user)
 app.use(category)
 app.use(transection)
+app.use(payment)
 
 
 
