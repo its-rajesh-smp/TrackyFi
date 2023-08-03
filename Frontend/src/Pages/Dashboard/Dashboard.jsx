@@ -7,7 +7,7 @@ import LineChart from "../../Components/UI/Dashboard/LineChart/LineChart";
 import { useSelector } from "react-redux";
 
 function Dashboard(props) {
-  const expenseData = useSelector((state) => state.transectionReducer.expense);
+  const expenseData = useSelector((state) => state.transectionReducer.transections);
 
   // GETTING TODAY
   const currentDate = new Date();

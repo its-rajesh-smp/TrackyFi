@@ -8,13 +8,13 @@ function DoughnutChart(props) {
   // Creating Map
   const categoryMap = new Map();
   expenses.forEach((expenses) => {
-    if (categoryMap.has(expenses.category)) {
+    if (categoryMap.has(expenses.category.name)) {
       categoryMap.set(
-        expenses.category,
-        categoryMap.get(expenses.category) + Number(expenses.price)
+        expenses.category.name,
+        categoryMap.get(expenses.category.name) + Number(expenses.price)
       );
     } else {
-      categoryMap.set(expenses.category, Number(expenses.price));
+      categoryMap.set(expenses.category.name, Number(expenses.price));
     }
   });
 
