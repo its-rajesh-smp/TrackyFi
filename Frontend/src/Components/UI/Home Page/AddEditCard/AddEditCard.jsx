@@ -19,7 +19,11 @@ function AddEditCard(props) {
   const [date, setDate] = useState(selector.data.date);
   const [time, setTime] = useState(selector.data.time);
   const [price, setPrice] = useState(selector.data.price);
-  const [category, setCategory] = useState(selector.data.category ? selector.data.category : { id: 0, name: "No Category" });
+  const [category, setCategory] = useState(
+    selector.data.category
+      ? selector.data.category
+      : { name: "No Category", id: 0 }
+  );
   const [loader, setLoader] = useState(false);
 
   /* -------------------------------------------------------------------------- */
@@ -138,11 +142,16 @@ function AddEditCard(props) {
           name="cataselect"
           id="cataselect"
         >
-          <option value={JSON.stringify({ id: 0, name: "No Category" })}>No Category</option>
+          <option value={JSON.stringify({ id: 0, name: "No Category" })}>
+            No Category
+          </option>
 
           {categoryList.map((category) => {
             return (
-              <option key={Math.random()} value={JSON.stringify({ name: category.name, id: category.id, })}>
+              <option
+                key={Math.random()}
+                value={JSON.stringify({ name: category.name, id: category.id })}
+              >
                 {category.name}
               </option>
             );

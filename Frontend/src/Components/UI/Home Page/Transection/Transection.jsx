@@ -3,35 +3,40 @@ import "./Transection.css";
 import { useDispatch } from "react-redux";
 import { toggleEdit } from "../../../../Store/Reducer/toggleAddEditExpense";
 
-function Transection(props) {
-
+function Transection({ id, type, name, category, date, time, price }) {
+  const dispatch = useDispatch();
 
   /* -------------------------------------------------------------------------- */
   /*                                  ON CLICK                                  */
   /* -------------------------------------------------------------------------- */
-  const dispatch = useDispatch();
   const onClickHandeler = () => {
-    dispatch(toggleEdit(props.data));
+    const payload = {
+      id,
+      type,
+      name,
+      category: { name: category.name, id: category.id },
+      date,
+      time,
+      price,
+    };
+    dispatch(toggleEdit(payload));
   };
 
   return (
-    <div
-      onClick={onClickHandeler}
-      className={` Transection-div ${props.data.type}`}
-    >
+    <div onClick={onClickHandeler} className={` Transection-div ${type}`}>
       <div className="Transection-div_left">
         <p className="Transection-div_Name">
-          <span>{props.data.name}</span> /{" "}
-          <span className="catagorie">{props.data.category.name}</span>
+          <span>{name}</span> /{" "}
+          <span className="catagorie">{category.name}</span>
         </p>
         <div className="Transection-div__div">
-          <p className="Transection-div_Date">{props.data.date}</p>
-          <p className="Transection-div_Time">{props.data.time}</p>
+          <p className="Transection-div_Date">{date}</p>
+          <p className="Transection-div_Time">{time}</p>
         </div>
       </div>
       <div className="Transection-div_right">
         <p>
-          <span>{props.data.price}</span> $
+          <span>{price}</span> $
         </p>
       </div>
     </div>

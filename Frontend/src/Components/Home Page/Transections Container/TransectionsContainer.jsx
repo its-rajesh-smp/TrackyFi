@@ -4,21 +4,31 @@ import "./TransectionsContainer.css";
 // Component
 import Transection from "../../UI/Home Page/Transection/Transection";
 
-function TransectionsContainer(props) {
-  const transectionArr = props.data;
-
+function TransectionsContainer({ date, transections }) {
   // Generating Datename from date
-  const dateName = new Date(props.id).toLocaleDateString("en-US", { weekday: 'long' })
-
+  const dateName = new Date(date).toLocaleDateString("en-US", {
+    weekday: "long",
+  });
 
   return (
     <div className=" TransectionsContainer-div ">
       <p className="currentDate">
-        <span>{props.id}</span>
+        <span>{date}</span>
         <span>{dateName}</span>
       </p>
-      {transectionArr.map((expense) => {
-        return <Transection key={expense.id} data={expense} />;
+      {transections.map((transection) => {
+        return (
+          <Transection
+            id={transection.id}
+            key={transection.id}
+            category={transection.category}
+            name={transection.name}
+            date={transection.date}
+            time={transection.time}
+            price={transection.price}
+            type={transection.type}
+          />
+        );
       })}
     </div>
   );

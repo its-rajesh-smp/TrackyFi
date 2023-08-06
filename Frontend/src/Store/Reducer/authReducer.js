@@ -12,7 +12,7 @@ import {
 } from "../../API/endpoint";
 
 import { clearExpense } from "./transectionReducer";
-
+import { setCategory } from "./categoryReducer";
 import { setVisiblefunc } from "./notificationReducer";
 
 const authReducer = createSlice({
@@ -81,6 +81,8 @@ export const createUserfunc = (
         localStorage.setItem("trackfyUser", data.body.idToken);
 
         // DISPATCHING
+        dispatch(setCategory(data.body.categories));
+        delete data.body.categories;
         dispatch(authUser(data.body));
       }
     } catch (error) {
@@ -113,6 +115,8 @@ export const fetchUsefunc = (setLoading) => {
       }
 
       // DISPATCHING
+      dispatch(setCategory(data.body.categories));
+      delete data.body.categories;
       dispatch(authUser(data.body));
     } catch (error) {
       let message = error.message;

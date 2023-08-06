@@ -5,7 +5,6 @@ import {
   createUserfunc,
   sendForgotPassword,
 } from "../../Store/Reducer/authReducer";
-import { authUsingGoogle } from "../../Firebase/firebase";
 
 function Login(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
@@ -61,9 +60,7 @@ function Login(props) {
     }
   };
 
-  const googleAuthHandeler = () => {
-    dispatch(authUsingGoogle());
-  };
+  const googleAuthHandeler = () => {};
 
   return (
     <div className={` Login-div ${theme}`}>

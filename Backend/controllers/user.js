@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const Category = require("../models/category");
-const Transections = require("../models/transection");
 
 const bcrypt = require("bcrypt");
 const jwt = require("../utils/jwt");
@@ -46,7 +45,10 @@ exports.signin = async (req, res) => {
     const { email, password } = req.body;
 
     // Finding User
-    const dbRes = await User.findOne({ where: { email: email } });
+    const dbRes = await User.findOne({
+      where: { email: email },
+      include: { model: Category, as: "categories" },
+    });
 
     // If User Not Present
     if (dbRes === null) {
@@ -69,9 +71,10 @@ exports.signin = async (req, res) => {
     // Forming Payload
     const payload = {
       email,
-      VIP: dbRes.dataValues.VIP,
-      verified: dbRes.dataValues.verified,
+      VIP: dbRes.VIP,
+      verified: dbRes.verified,
       idToken: idToken,
+      categories: dbRes.categories,
     };
 
     res.send({ error: false, body: payload });
@@ -95,6 +98,7 @@ exports.getUser = async (req, res) => {
     // Finding User
     const dbRes = await User.findOne({
       where: { email: email },
+      include: { model: Category, as: "categories" },
     });
 
     // If User Not Found
@@ -114,9 +118,10 @@ exports.getUser = async (req, res) => {
 
     // Forming Payload
     const payload = {
-      VIP: dbRes.dataValues.VIP,
-      email: dbRes.dataValues.email,
-      verified: dbRes.dataValues.verified,
+      VIP: dbRes.VIP,
+      email: dbRes.email,
+      verified: dbRes.verified,
+      categories: dbRes.categories,
     };
 
     res.send({ error: false, body: payload });
