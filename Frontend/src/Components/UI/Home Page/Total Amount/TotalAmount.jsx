@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import "./TotalAmount.css";
 import { useSelector } from "react-redux";
 
-function TotalAmount(props) {
+function TotalAmount() {
   const selector = useSelector((state) => state.totalReducer);
 
   return (
