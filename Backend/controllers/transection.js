@@ -1,5 +1,6 @@
 const Transections = require("../models/transection");
 const Category = require("../models/category");
+const { Op } = require("sequelize");
 
 /* -------------------------------------------------------------------------- */
 /*                                     ADD                                    */
@@ -82,14 +83,35 @@ exports.delete = async (req, res) => {
 
 exports.get = async (req, res) => {
   try {
-    const { limit, skip } = req.params;
+    const { limit, skip, search, date } = req.params;
 
+    const where = {};
+
+    // Filtering Search Param
+    if (search !== "null") {
+      where[Op.or] = [
+        { name: { [Op.like]: `%${search}%` } },
+        { price: { [Op.like]: `%${search}%` } },
+        { date: { [Op.like]: `%${search}%` } },
+        { time: { [Op.like]: `%${search}%` } },
+        { type: { [Op.like]: `%${search}%` } },
+      ];
+    }
+
+    // Filtering Date Param
+    if (date !== "null") {
+      where.date = date;
+    }
+
+    // Finding With Filter
     const dbRes = await Transections.findAll({
       // limit: Number(limit),
       // offset: Number(skip),
+      where,
       include: { model: Category, as: "category" },
     });
 
+    // Sending To Frontend
     res.send({ error: null, body: dbRes });
   } catch (error) {
     console.log(error.message);

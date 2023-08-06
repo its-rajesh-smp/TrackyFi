@@ -3,18 +3,16 @@ import "./TotalAmount.css";
 import { useSelector } from "react-redux";
 
 function TotalAmount() {
-  const selector = useSelector((state) => state.totalReducer);
+  const { totalExpense, totalCredit } = useSelector(
+    (state) => state.totalReducer
+  );
 
   return (
     <div className="TotalAmount-Div">
       <p>Total:</p>
       <p>
-        <span className="TotalAmount-Div_totalExpense">
-          {selector.totalExpense}$
-        </span>
-        <span className="TotalAmount-Div_totalCredit">
-          {selector.totalCredit}$
-        </span>
+        <span className="TotalAmount-Div_totalExpense">{totalExpense}$</span>
+        <span className="TotalAmount-Div_totalCredit">{totalCredit}$</span>
       </p>
     </div>
   );
