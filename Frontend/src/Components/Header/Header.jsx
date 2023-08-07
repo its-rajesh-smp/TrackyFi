@@ -27,6 +27,10 @@ function Header(props) {
         <NavLink to={"/category"}>
           <i className="bx bxs-category"></i>
         </NavLink>
+
+        <NavLink to={"/leaderboard"}>
+          <i className="bx bxs-card"></i>
+        </NavLink>
       </div>
 
       <div className="Header-div__bottom">

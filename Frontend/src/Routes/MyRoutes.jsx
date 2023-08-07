@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import CategoryPage from "../Pages/Category Page/CategoryPage";
 import Login from "../Pages/Login/Login";
 import CompleteProfile from "../Pages/Complete Profile/CompleteProfile";
+import LeaderBoardPage from "../Pages/LeaderBoard Page/LeaderBoardPage";
 
 function MyRoutes(props) {
   const isVerified = useSelector((state) => state.authReducer.verified);
@@ -21,6 +22,7 @@ function MyRoutes(props) {
           <Route path="/user" element={<UserProfile />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/leaderboard" element={<LeaderBoardPage />} />
           <Route path="*" element={<HomePage />} />
         </>
       )}

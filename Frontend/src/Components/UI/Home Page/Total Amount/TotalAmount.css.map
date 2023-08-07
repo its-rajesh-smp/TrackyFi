@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["TotalAmount.scss"],"names":[],"mappings":"AACA;EACE;EACA;EACA;EACA;EACA;;;AAEF;EACE;EACA;;;AAEF;EACE","file":"TotalAmount.css"}
+{"version":3,"sources":["TotalAmount.scss","TotalAmount.css"],"names":[],"mappings":"AACA;EACE,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;EACA,eAAA;ACAF;;ADEA;EACE,sBAAA;EACA,qBAAA;ACCF;;ADCA;EACE,YAAA;ACEF","file":"TotalAmount.css"}

@@ -89,6 +89,7 @@
   background-color: #1877f2;
   height: 2.8125rem;
   font-weight: 500;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0px 3.125rem;
   border-radius: 0.3125rem;

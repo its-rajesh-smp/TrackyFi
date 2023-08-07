@@ -47,6 +47,7 @@
   margin-top: 0.3125rem;
   align-self: flex-end;
   bottom: 0;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 0px 3.125rem;
   height: 2.5rem;

@@ -20,6 +20,10 @@
   outline: none;
   border-radius: 0.3125rem;
 }
+.input_fields div input::-moz-placeholder {
+  font-family: "Poppins", sans-serif;
+  color: black;
+}
 .input_fields div input::placeholder {
   font-family: "Poppins", sans-serif;
   color: black;

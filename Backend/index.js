@@ -1,44 +1,37 @@
-const express = require("express")
-const body_parser = require("body-parser")
-const cors = require("cors")
-const sequelize = require("./utils/database")
+const express = require("express");
+const body_parser = require("body-parser");
+const cors = require("cors");
+const sequelize = require("./utils/database");
 
 // Routes
-const user = require("./routes/user")
-const category = require("./routes/category")
-const transection = require("./routes/transection")
-const payment = require("./routes/payment")
+const user = require("./routes/user");
+const category = require("./routes/category");
+const transection = require("./routes/transection");
+const payment = require("./routes/payment");
 
-const app = express()
-
+const app = express();
 
 // Relation
-const relations = require("./relations/relations")()
-
+const relations = require("./relations/relations")();
 
 // Middlewires
-app.use(body_parser.urlencoded({ extended: false }))
-app.use(cors())
-app.use(express.json())
+app.use(body_parser.urlencoded({ extended: false }));
+app.use(cors());
+app.use(express.json());
 
-
-app.use(user)
-app.use(category)
-app.use(transection)
-app.use(payment)
-
-
+app.use(user);
+app.use(category);
+app.use(transection);
+app.use(payment);
 
 // SERVER AND APP STARTS FROM HERE
-sequelize.sync().then(() => {
+sequelize
+  .sync()
+  .then(() => {
     app.listen(5000, () => {
-        console.log("APP IS LISTENING");
-    })
-}).catch((error) => {
+      console.log("APP IS LISTENING");
+    });
+  })
+  .catch((error) => {
     console.log(error);
-})
-
-
-
-
-
+  });

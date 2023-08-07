@@ -1,0 +1,12 @@
+.LeaderBoardPage {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: 1.25rem;
+}
+.LeaderBoardPage h1 {
+  font-size: 2.1875rem;
+  font-family: poppins;
+}/*# sourceMappingURL=LeaderBoardPage.css.map */
