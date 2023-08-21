@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createUserfunc,
-  sendForgotPassword,
-} from "../../Store/Reducer/authReducer";
+import { sendForgotPassword } from "../../Store/Reducer/authReducer";
 import { authUsingGoogle } from "../../Firebase/firebase";
+import {
+  forgotPassAct,
+  signInAct,
+  signUpAct,
+} from "../../Store/Actions/AuthActions";
 
 function Login(props) {
   const theme = useSelector((state) => state.themeReducer.theme);
   const dispatch = useDispatch();
-  const [switchLogin, setSwitchLogin] = useState(false);
+
+  const [switchLogin, setSwitchLogin] = useState(false); // This State is used to switch betwen login form and create new account form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loader, setLoader] = useState(false);
-  const [onForgot, setOnForgot] = useState(false);
+  const [onForgot, setOnForgot] = useState(false); // This state is used to change the form to forgot password form
 
   /* -------------------------------------------------------------------------- */
   /*                                SWICTH LOGIN                                */
@@ -31,14 +34,9 @@ function Login(props) {
     e.preventDefault();
     if (!loader) {
       setLoader(true);
-      dispatch(
-        createUserfunc(
-          { email: email, password: password },
-          switchLogin,
-          onSwitchLoginHandeler,
-          setLoader
-        )
-      );
+      switchLogin
+        ? dispatch(signInAct({ email, password }, setLoader))
+        : dispatch(signUpAct({ email, password }, setLoader));
     }
   };
 
@@ -57,7 +55,7 @@ function Login(props) {
     e.preventDefault();
     if (!loader) {
       setLoader(true);
-      dispatch(sendForgotPassword(email, setLoader, setOnForgot));
+      forgotPassAct(email, setLoader, setOnForgot);
     }
   };
 

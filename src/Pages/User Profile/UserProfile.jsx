@@ -162,7 +162,9 @@ function UserProfile(props) {
         )}
 
         {!selector.VIP && (
-          <p style={{ cursor: "pointer" }} onClick={onClickUnlockVip}>Unlock VIP</p>
+          <p style={{ cursor: "pointer" }} onClick={onClickUnlockVip}>
+            Unlock VIP
+          </p>
         )}
       </form>
     </div>

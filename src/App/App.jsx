@@ -3,7 +3,7 @@ import "./App.css";
 import MyRoutes from "../Routes/MyRoutes";
 import MyLayout from "../Layout/MyLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsefunc } from "../Store/Reducer/authReducer";
+import { getUserAct } from "../Store/Actions/AuthActions";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ function App(props) {
   /* -------------------------------------------------------------------------- */
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUsefunc(setLoading));
+    dispatch(getUserAct(setLoading));
   }, []);
 
   if (loading) {

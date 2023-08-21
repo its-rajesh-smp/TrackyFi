@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CompleteProfile.css";
 import { useDispatch } from "react-redux";
-import { verifyUserfunc } from "../../Store/Reducer/authReducer";
+import { verifyUserAct } from "../../Store/Actions/AuthActions";
 
 function CompleteProfile(props) {
   const [name, setName] = useState();
@@ -15,7 +15,7 @@ function CompleteProfile(props) {
   const onBtnSubmitHandeler = () => {
     if (!loading) {
       setLoading(true);
-      dispatch(verifyUserfunc(name, mobile, setLoading));
+      dispatch(verifyUserAct({ name, mobile }, setLoading));
     }
   };
 
